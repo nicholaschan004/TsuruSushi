@@ -29,7 +29,12 @@ Decimal phases appear between their surrounding integers in numeric order.
   3. The app renders in the browser without a login screen or auth spinner
   4. `grep -r "base44" src/` returns zero results
   5. `src/lib/utils.js` exports a working `cn()` function and all shadcn components load
-**Plans**: TBD
+**Plans:** 2 plans
+
+Plans:
+- [ ] 01-01-PLAN.md — Build config and library stubs (vite.config.js, postcss, utils, query-client, toast fix)
+- [ ] 01-02-PLAN.md — Auth removal, App.jsx rewrite, Home page creation, full build verification
+
 **UI hint**: yes
 
 ### Phase 2: Page Assembly
@@ -75,7 +80,7 @@ Phases execute in numeric order: 1 → 2 → 3 → 4
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation | 0/? | Not started | - |
+| 1. Foundation | 0/2 | Planning complete | - |
 | 2. Page Assembly | 0/? | Not started | - |
 | 3. Content and Cleanup | 0/? | Not started | - |
 | 4. SEO and Deployment | 0/? | Not started | - |
