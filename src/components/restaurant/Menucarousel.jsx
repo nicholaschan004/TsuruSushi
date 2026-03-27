@@ -46,20 +46,35 @@ export default function MenuCarousel() {
     useEffect(() => {
         if (!sectionRef.current) return;
         const el = sectionRef.current;
+        let lastY = window.scrollY;
+        let scrollingDown = false;
+
+        const onScroll = () => {
+            scrollingDown = window.scrollY > lastY;
+            lastY = window.scrollY;
+        };
+        window.addEventListener("scroll", onScroll, { passive: true });
+
         const observer = new IntersectionObserver(
             ([entry]) => {
-                if (entry.isIntersecting && !hasSnapped.current) {
-                    hasSnapped.current = true;
-                    window.scrollTo({
-                        top: el.offsetTop,
-                        behavior: "smooth",
-                    });
+                if (entry.isIntersecting && !hasSnapped.current && scrollingDown) {
+                    const rect = el.getBoundingClientRect();
+                    if (rect.top > -100 && rect.top < 200) {
+                        hasSnapped.current = true;
+                        window.scrollTo({
+                            top: el.offsetTop,
+                            behavior: "smooth",
+                        });
+                    }
                 }
             },
             { threshold: 0.1 }
         );
         observer.observe(el);
-        return () => observer.disconnect();
+        return () => {
+            observer.disconnect();
+            window.removeEventListener("scroll", onScroll);
+        };
     }, []);
 
     const scroll = (direction) => {
