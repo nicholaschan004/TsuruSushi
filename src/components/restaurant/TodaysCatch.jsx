@@ -9,7 +9,7 @@ const catches = [
 
 export default function TodaysCatch() {
     return (
-        <section className="py-24 md:py-36 px-6 md:px-12 max-w-screen-2xl mx-auto">
+        <section className="snap-start min-h-screen flex flex-col justify-center pt-16 pb-8 md:pt-24 md:pb-12 px-6 md:px-12 max-w-screen-2xl mx-auto">
             <div className="grid grid-cols-12 gap-4">
                 <div className="col-span-12 md:col-span-4 md:col-start-2">
                     <motion.div

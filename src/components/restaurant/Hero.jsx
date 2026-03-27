@@ -11,7 +11,7 @@ export default function Hero() {
     const splitRight = useTransform(scrollY, [0, 600], [0, 120]);
 
     return (
-        <section className="relative h-screen overflow-hidden">
+        <section className="relative h-screen overflow-hidden snap-start">
             {/* Background image with parallax */}
             <motion.div
                 style={{ y: imgY }}
@@ -46,16 +46,13 @@ export default function Hero() {
                 </div>
 
                 <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.8, duration: 1 }}
-                    className="mt-6 flex flex-col items-center gap-3"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 1.2, duration: 1.5 }}
+                    className="mt-8 flex items-center gap-3"
                 >
-                    <p className="font-body text-xs sm:text-sm tracking-[0.4em] uppercase text-background/80">
-                        The Art of the Cut
-                    </p>
-                    <p className="font-body text-[10px] tracking-[0.25em] uppercase text-background/50">
-                        San Leandro Chamber of Commerce Award Honoree
+                    <p className="font-body text-[9px] tracking-[0.5em] uppercase text-background/40">
+                        — San Leandro Chamber of Commerce Award Honoree —
                     </p>
                 </motion.div>
 

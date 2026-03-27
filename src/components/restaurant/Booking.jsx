@@ -19,7 +19,7 @@ export default function Booking() {
     const [selected, setSelected] = useState(null);
 
     return (
-        <section id="reserve" ref={ref} className="py-24 md:py-36 px-6 md:px-12 max-w-screen-2xl mx-auto">
+        <section id="reserve" ref={ref} className="snap-start min-h-screen flex flex-col justify-center py-16 md:py-24 px-6 md:px-12 max-w-screen-2xl mx-auto">
             <div className="grid grid-cols-12 gap-6 md:gap-10">
                 {/* Sittings */}
                 <motion.div
