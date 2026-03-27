@@ -11,14 +11,13 @@ import Footer from "@/components/restaurant/Footer"
 
 export default function Home() {
     return (
-        <div className="min-h-screen bg-background">
+        <div className="h-screen overflow-y-auto snap-y snap-proximity bg-background">
             <Navigation />
             <Hero />
             <Experience />
             <TodaysCatch />
             <MenuCarousel />
             <Provenance />
-            <Booking />
             <OrderReserve />
             <MapHours />
             <Footer />

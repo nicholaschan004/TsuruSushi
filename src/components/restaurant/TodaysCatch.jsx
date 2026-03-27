@@ -22,9 +22,9 @@ export default function TodaysCatch() {
                             Today's Selection
                         </p>
                         <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-light leading-tight text-foreground">
-                            The Morning
+                            The Chief's
                             <br />
-                            Catch
+                            Daily Special
                         </h2>
                     </motion.div>
                 </div>
