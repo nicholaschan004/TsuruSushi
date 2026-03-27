@@ -4,14 +4,13 @@ import MenuCarousel from "@/components/restaurant/Menucarousel"
 import Experience from "@/components/restaurant/Experience"
 import Provenance from "@/components/restaurant/Provenance"
 import TodaysCatch from "@/components/restaurant/TodaysCatch"
-import Booking from "@/components/restaurant/Booking"
 import OrderReserve from "@/components/restaurant/OrderReserve"
 import MapHours from "@/components/restaurant/MapHours"
 import Footer from "@/components/restaurant/Footer"
 
 export default function Home() {
     return (
-        <div className="h-screen overflow-y-auto snap-y snap-proximity bg-background">
+        <div className="min-h-screen bg-background">
             <Navigation />
             <Hero />
             <Experience />

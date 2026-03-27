@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
 import { ArrowRight, ArrowLeft } from "lucide-react";
 
@@ -40,7 +40,27 @@ const MENU_ITEMS = [
 export default function MenuCarousel() {
     const scrollRef = useRef(null);
     const sectionRef = useRef(null);
+    const hasSnapped = useRef(false);
     const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+
+    useEffect(() => {
+        if (!sectionRef.current) return;
+        const el = sectionRef.current;
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting && !hasSnapped.current) {
+                    hasSnapped.current = true;
+                    window.scrollTo({
+                        top: el.offsetTop,
+                        behavior: "smooth",
+                    });
+                }
+            },
+            { threshold: 0.1 }
+        );
+        observer.observe(el);
+        return () => observer.disconnect();
+    }, []);
 
     const scroll = (direction) => {
         if (scrollRef.current) {
@@ -53,25 +73,25 @@ export default function MenuCarousel() {
     };
 
     return (
-        <section id="menu" ref={sectionRef} className="snap-start min-h-screen flex flex-col justify-center py-24 md:py-36">
+        <section id="menu" ref={sectionRef} className="pt-12 md:pt-16 pb-24 md:pb-36">
             {/* Section header */}
             <div className="px-6 md:px-12 max-w-screen-2xl mx-auto mb-16">
-                <div className="flex flex-col items-start">
-                    <motion.div
-                        initial={{ opacity: 0, y: 30 }}
-                        animate={isInView ? { opacity: 1, y: 0 } : {}}
-                        transition={{ duration: 0.8 }}
-                    >
-                        <p className="font-body text-[10px] tracking-[0.4em] uppercase text-muted-foreground mb-4">
-                            Most Popular
-                        </p>
-                        <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-light text-foreground">
-                            The Menu
-                        </h2>
-                    </motion.div>
-
-                    {/* Buttons moved to be beneath or alongside heading on left */}
-                    <div className="flex items-center gap-4 mt-10">
+                <div className="grid grid-cols-12 gap-4">
+                    <div className="col-span-12 md:col-span-6 md:col-start-1">
+                        <motion.div
+                            initial={{ opacity: 0, y: 30 }}
+                            animate={isInView ? { opacity: 1, y: 0 } : {}}
+                            transition={{ duration: 0.8 }}
+                        >
+                            <p className="font-body text-[10px] tracking-[0.4em] uppercase text-muted-foreground mb-4">
+                                Most Popular
+                            </p>
+                            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-light text-foreground">
+                                The Menu
+                            </h2>
+                        </motion.div>
+                    </div>
+                    <div className="col-span-12 md:col-span-3 md:col-start-9 flex items-end justify-start md:justify-end gap-4 mt-6 md:mt-0">
                         <button
                             onClick={() => scroll("left")}
                             className="w-12 h-12 border border-border flex items-center justify-center hover:bg-foreground hover:text-background transition-all duration-300"
@@ -99,7 +119,7 @@ export default function MenuCarousel() {
                         initial={{ opacity: 0, y: 40 }}
                         animate={isInView ? { opacity: 1, y: 0 } : {}}
                         transition={{ duration: 0.7, delay: i * 0.12 }}
-                        className="flex-shrink-0 w-[80vw] sm:w-[60vw] md:w-[40vw] lg:w-[30vw] group cursor-pointer"
+                        className="flex-shrink-0 w-[60vw] sm:w-[45vw] md:w-[28vw] lg:w-[22vw] group cursor-pointer"
                     >
                         <div className="relative overflow-hidden bg-secondary aspect-[3/4]">
                             <img
