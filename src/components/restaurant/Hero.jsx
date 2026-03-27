@@ -60,7 +60,7 @@ export default function Hero() {
                     transition={{ delay: 0.8, duration: 1 }}
                     className="mt-6 flex flex-col items-center gap-3"
                 >
-                    <p className="font-body text-[10px] tracking-[0.25em] uppercase text-background/50">
+                    <p className="font-body text-[10px] tracking-[0.25em] uppercase text-background/50 text-center px-4">
                         — San Leandro Chamber of Commerce Award Honoree —
                     </p>
                 </motion.div>
