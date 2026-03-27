@@ -7,7 +7,7 @@ const NAV_LINKS = [
     { label: "Experience", href: "#experience" },
     { label: "Provenance", href: "#provenance" },
     { label: "Reserve", href: "#reserve" },
-    { label: "Hours", href: "#hours", mobileOnly: true },
+    { label: "Hours", href: "#hours" },
     { label: "Directions", href: "https://maps.google.com/?q=1427+E+14th+St+San+Leandro+CA+94577", mobileOnly: true },
 ];
 
