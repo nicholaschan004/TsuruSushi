@@ -7,6 +7,8 @@ const NAV_LINKS = [
     { label: "Experience", href: "#experience" },
     { label: "Provenance", href: "#provenance" },
     { label: "Reserve", href: "#reserve" },
+    { label: "Hours", href: "#hours", mobileOnly: true },
+    { label: "Directions", href: "https://maps.google.com/?q=1427+E+14th+St+San+Leandro+CA+94577", mobileOnly: true },
 ];
 
 export default function Navigation() {
@@ -32,6 +34,10 @@ export default function Navigation() {
 
     const scrollTo = (href) => {
         setMobileOpen(false);
+        if (href.startsWith("http")) {
+            window.open(href, "_blank", "noopener,noreferrer");
+            return;
+        }
         const el = document.querySelector(href);
         if (el) el.scrollIntoView({ behavior: "smooth" });
     };
@@ -55,7 +61,7 @@ export default function Navigation() {
                             </a>
 
                             <nav className="hidden md:flex items-center gap-10">
-                                {NAV_LINKS.map((link) => (
+                                {NAV_LINKS.filter(l => !l.mobileOnly).map((link) => (
                                     <button
                                         key={link.label}
                                         onClick={() => scrollTo(link.href)}
