@@ -39,11 +39,13 @@ export default function Experience() {
                             Premium Selection
                         </p>
                         <h2 className="font-display text-4xl md:text-5xl font-light text-foreground leading-tight">
-                            Chef's Daily Special
+                            Chef's
+                            <br />
+                            Daily Special
                         </h2>
                         <p className="font-body text-sm text-muted-foreground mt-6 leading-[1.8]">
-                            Discover our curated selection of ultra-premium Chirashi and Sashimi. 
-                            Hand-selected daily from the morning's finest catch, prepared with uncompromising precision.
+                            Discover our curated selection of ultra-premium Chirashi and Sashimi.
+                            Hand-selected daily from the morning's finest catch.
                         </p>
                         <div className="mt-10 space-y-4">
                             <div className="flex flex-col py-3 border-b border-border">

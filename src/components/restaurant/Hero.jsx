@@ -11,10 +11,13 @@ export default function Hero() {
     const splitRight = useTransform(scrollY, [0, 600], [0, 120]);
 
     return (
-        <section className="relative h-screen overflow-hidden snap-start">
-            {/* Background image with parallax */}
+        <section className="relative h-screen overflow-hidden">
+            {/* Background image with parallax + slow zoom */}
             <motion.div
                 style={{ y: imgY }}
+                initial={{ scale: 1.15 }}
+                animate={{ scale: 1 }}
+                transition={{ duration: 6, ease: "easeOut" }}
                 className="absolute inset-0 -top-20"
             >
                 <img
@@ -32,12 +35,18 @@ export default function Hero() {
             >
                 <div className="flex items-center overflow-hidden">
                     <motion.span
+                        initial={{ opacity: 0, y: 40 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
                         style={{ x: splitLeft }}
                         className="font-display text-6xl sm:text-8xl md:text-9xl lg:text-[10rem] font-light tracking-[0.3em] text-background"
                     >
                         TSU
                     </motion.span>
                     <motion.span
+                        initial={{ opacity: 0, y: 40 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 1, delay: 0.5, ease: "easeOut" }}
                         style={{ x: splitRight }}
                         className="font-display text-6xl sm:text-8xl md:text-9xl lg:text-[10rem] font-light tracking-[0.3em] text-background"
                     >
@@ -46,12 +55,12 @@ export default function Hero() {
                 </div>
 
                 <motion.div
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 1.2, duration: 1.5 }}
-                    className="mt-8 flex items-center gap-3"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.8, duration: 1 }}
+                    className="mt-6 flex flex-col items-center gap-3"
                 >
-                    <p className="font-body text-[9px] tracking-[0.5em] uppercase text-background/40">
+                    <p className="font-body text-[10px] tracking-[0.25em] uppercase text-background/50">
                         — San Leandro Chamber of Commerce Award Honoree —
                     </p>
                 </motion.div>

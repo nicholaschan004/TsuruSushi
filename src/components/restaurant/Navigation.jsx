@@ -49,7 +49,8 @@ export default function Navigation() {
                             }`}
                     >
                         <div className="max-w-screen-2xl mx-auto flex items-center justify-between px-6 md:px-12 py-5">
-                            <a href="#" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="font-display text-2xl tracking-[0.3em] font-light text-foreground">
+                            <a href="#" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="flex items-center gap-3 font-display text-2xl tracking-[0.3em] font-light text-foreground">
+                                <img src="/logo_transparent.png" alt="Tsuru logo" className={`w-8 h-8 object-contain transition-all duration-500 ${scrolled ? "brightness-0" : ""}`} />
                                 TSURU
                             </a>
 
@@ -58,7 +59,7 @@ export default function Navigation() {
                                     <button
                                         key={link.label}
                                         onClick={() => scrollTo(link.href)}
-                                        className="font-body text-xs tracking-[0.2em] uppercase text-muted-foreground hover:text-foreground transition-colors duration-300"
+                                        className="font-body text-xs tracking-[0.2em] uppercase text-foreground/70 hover:text-foreground transition-colors duration-300"
                                     >
                                         {link.label}
                                     </button>
