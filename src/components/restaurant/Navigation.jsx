@@ -3,10 +3,10 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
 const NAV_LINKS = [
-    { label: "Menu", href: "#menu" },
     { label: "Experience", href: "#experience" },
-    { label: "Provenance", href: "#provenance" },
-    { label: "Reserve", href: "#reserve" },
+    { label: "Menu", href: "#menu" },
+    { label: "Source", href: "#provenance" },
+    { label: "Order & Reserve", href: "#order" },
     { label: "Hours", href: "#hours" },
     { label: "Directions", href: "https://maps.google.com/?q=1427+E+14th+St+San+Leandro+CA+94577", mobileOnly: true },
 ];
@@ -55,8 +55,8 @@ export default function Navigation() {
                             }`}
                     >
                         <div className="max-w-screen-2xl mx-auto flex items-center justify-between px-6 md:px-12 py-5">
-                            <a href="#" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="flex items-center gap-3 font-display text-2xl tracking-[0.3em] font-light text-foreground">
-                                <img src="/logo_transparent.png" alt="Tsuru logo" className={`w-8 h-8 object-contain transition-all duration-500 ${scrolled ? "brightness-0" : ""}`} />
+                            <a href="#" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className={`flex items-center gap-3 font-display text-2xl tracking-[0.3em] font-light transition-colors duration-500 ${scrolled ? "text-foreground" : "text-white"}`}>
+                                <img src="/logo_transparent.png" alt="Tsuru logo" className={`w-8 h-8 object-contain transition-all duration-500 ${scrolled ? "brightness-0" : "brightness-0 invert"}`} />
                                 TSURU
                             </a>
 
@@ -65,7 +65,7 @@ export default function Navigation() {
                                     <button
                                         key={link.label}
                                         onClick={() => scrollTo(link.href)}
-                                        className="font-body text-xs tracking-[0.2em] uppercase text-foreground/70 hover:text-foreground transition-colors duration-300"
+                                        className={`font-body text-xs tracking-[0.2em] uppercase transition-colors duration-300 ${scrolled ? "text-foreground/70 hover:text-foreground" : "text-white/80 hover:text-white"}`}
                                     >
                                         {link.label}
                                     </button>
@@ -74,7 +74,7 @@ export default function Navigation() {
 
                             <button
                                 onClick={() => setMobileOpen(true)}
-                                className="md:hidden text-foreground"
+                                className={`md:hidden transition-colors duration-500 ${scrolled ? "text-foreground" : "text-white"}`}
                             >
                                 <Menu className="w-5 h-5" />
                             </button>
