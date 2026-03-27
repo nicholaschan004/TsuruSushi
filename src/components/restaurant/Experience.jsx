@@ -9,7 +9,7 @@ export default function Experience() {
     const isInView = useInView(ref, { once: true, margin: "-100px" });
 
     return (
-        <section id="experience" ref={ref} className="py-24 md:py-36 bg-secondary">
+        <section id="experience" ref={ref} className="snap-start min-h-screen flex flex-col justify-center py-16 md:py-24 bg-secondary">
             <div className="px-6 md:px-12 max-w-screen-2xl mx-auto">
                 <div className="grid grid-cols-12 gap-6 md:gap-10">
                     {/* Image */}
@@ -36,30 +36,36 @@ export default function Experience() {
                         className="col-span-12 md:col-span-4 md:col-start-9 flex flex-col justify-center"
                     >
                         <p className="font-body text-[10px] tracking-[0.4em] uppercase text-muted-foreground mb-4">
-                            The Omakase
+                            Premium Selection
                         </p>
                         <h2 className="font-display text-4xl md:text-5xl font-light text-foreground leading-tight">
-                            Trust the
-                            <br />
-                            Chef
+                            Chef's Daily Special
                         </h2>
                         <p className="font-body text-sm text-muted-foreground mt-6 leading-[1.8]">
-                            Our Omakase is a 12-course journey through the season's finest.
-                            Each course is a conversation between the Itamae and the ocean —
-                            no two sittings are alike.
+                            Discover our curated selection of ultra-premium Chirashi and Sashimi. 
+                            Hand-selected daily from the morning's finest catch, prepared with uncompromising precision.
                         </p>
                         <div className="mt-10 space-y-4">
-                            <div className="flex items-baseline justify-between py-3 border-b border-border">
-                                <span className="font-display text-lg font-light">Omakase — 12 Courses</span>
-                                <span className="font-body text-sm text-muted-foreground">$185 / seat</span>
+                            <div className="flex flex-col py-3 border-b border-border">
+                                <div className="flex items-baseline justify-between w-full">
+                                    <span className="font-display text-lg font-light">Chirashi</span>
+                                    <span className="font-body text-sm text-muted-foreground">$39.95</span>
+                                </div>
+                                <p className="font-body text-[10px] text-muted-foreground mt-1 uppercase tracking-wider">Assorted raw fish over sushi rice</p>
                             </div>
-                            <div className="flex items-baseline justify-between py-3 border-b border-border">
-                                <span className="font-display text-lg font-light">Premium — 18 Courses</span>
-                                <span className="font-body text-sm text-muted-foreground">$285 / seat</span>
+                            <div className="flex flex-col py-3 border-b border-border">
+                                <div className="flex items-baseline justify-between w-full">
+                                    <span className="font-display text-lg font-light">Moriawase Sashimi</span>
+                                    <span className="font-body text-sm text-muted-foreground">$39.95</span>
+                                </div>
+                                <p className="font-body text-[10px] text-muted-foreground mt-1 uppercase tracking-wider">Assorted raw fish</p>
                             </div>
-                            <div className="flex items-baseline justify-between py-3 border-b border-border">
-                                <span className="font-display text-lg font-light">Chef's Table — Private</span>
-                                <span className="font-body text-sm text-muted-foreground">Inquiry</span>
+                            <div className="flex flex-col py-3 border-b border-border">
+                                <div className="flex items-baseline justify-between w-full">
+                                    <span className="font-display text-lg font-light">Tsuru Sashimi</span>
+                                    <span className="font-body text-sm text-muted-foreground">$78.00</span>
+                                </div>
+                                <p className="font-body text-[10px] text-muted-foreground mt-1 uppercase tracking-wider">House assorted raw fish</p>
                             </div>
                         </div>
                     </motion.div>

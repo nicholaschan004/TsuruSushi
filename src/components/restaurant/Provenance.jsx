@@ -34,7 +34,7 @@ export default function Provenance() {
     const isInView = useInView(ref, { once: true, margin: "-100px" });
 
     return (
-        <section id="provenance" ref={ref} className="py-24 md:py-36 bg-foreground text-background">
+        <section id="provenance" ref={ref} className="snap-start min-h-screen flex flex-col justify-center py-16 md:py-24 bg-foreground text-background">
             <div className="px-6 md:px-12 max-w-screen-2xl mx-auto">
                 <div className="grid grid-cols-12 gap-4">
                     <div className="col-span-12 md:col-span-5 md:col-start-2">
