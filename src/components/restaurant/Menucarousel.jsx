@@ -1,6 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
-import { ArrowRight, ArrowLeft } from "lucide-react";
 
 const MENU_ITEMS = [
     {
@@ -12,8 +11,8 @@ const MENU_ITEMS = [
         alt: "Three pieces of fresh salmon nigiri on black slate plate"
     },
     {
-        category: "Bluefin Series",
-        name: "Akami",
+        category: "Nigiri",
+        name: "Maguro",
         description: "Lean bluefin tuna. Clean, mineral finish with a whisper of wasabi.",
         price: "14",
         image: "https://media.base44.com/images/public/69c4afc75d0284fc64e49e47/bfd98dfab_generated_f9891c09.png",
@@ -28,12 +27,20 @@ const MENU_ITEMS = [
         alt: "Crispy nori hand roll filled with fresh fish and rice"
     },
     {
-        category: "Specialty",
+        category: "Nigiri",
         name: "Uni",
         description: "Hokkaido Murasaki. Briny, sweet, with a custard-like finish.",
         price: "18",
         image: "https://media.base44.com/images/public/69c4afc75d0284fc64e49e47/bce10d114_generated_fd901bd3.png",
         alt: "Golden sea urchin uni on black ceramic plate"
+    },
+    {
+        category: "Rolls",
+        name: "Rainbow Roll",
+        description: "California roll base topped with rotating slices of fresh tuna, salmon, yellowtail and avocado.",
+        price: "19.14",
+        image: "https://media.base44.com/images/public/69c4afc75d0284fc64e49e47/4b7e0c0be_generated_image.png",
+        alt: "Rainbow sushi roll topped with colorful fish and avocado"
     },
 ];
 
@@ -77,15 +84,6 @@ export default function MenuCarousel() {
         };
     }, []);
 
-    const scroll = (direction) => {
-        if (scrollRef.current) {
-            const amount = scrollRef.current.offsetWidth * 0.7;
-            scrollRef.current.scrollBy({
-                left: direction === "right" ? amount : -amount,
-                behavior: "smooth",
-            });
-        }
-    };
 
     return (
         <section id="menu" ref={sectionRef} className="pt-12 md:pt-16 pb-24 md:pb-36">
@@ -105,20 +103,6 @@ export default function MenuCarousel() {
                                 The Menu
                             </h2>
                         </motion.div>
-                    </div>
-                    <div className="col-span-12 md:col-span-3 md:col-start-9 flex items-end justify-start md:justify-end gap-4 mt-6 md:mt-0">
-                        <button
-                            onClick={() => scroll("left")}
-                            className="w-12 h-12 border border-border flex items-center justify-center hover:bg-foreground hover:text-background transition-all duration-300"
-                        >
-                            <ArrowLeft className="w-4 h-4" />
-                        </button>
-                        <button
-                            onClick={() => scroll("right")}
-                            className="w-12 h-12 border border-border flex items-center justify-center hover:bg-foreground hover:text-background transition-all duration-300"
-                        >
-                            <ArrowRight className="w-4 h-4" />
-                        </button>
                     </div>
                 </div>
             </div>
