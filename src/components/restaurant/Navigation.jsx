@@ -1,26 +1,31 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const NAV_LINKS = [
+    { label: "Menu", href: "/menu" },
     { label: "Experience", href: "#experience" },
-    { label: "Menu", href: "#menu" },
+    { label: "Highlights", href: "#menu" },
     { label: "Source", href: "#provenance" },
-    { label: "Order & Reserve", href: "#order" },
+    { label: "Order Online", href: "#order" },
     { label: "Hours", href: "#hours" },
+    { label: "Contact", href: "#contact" },
     { label: "Directions", href: "https://maps.google.com/?q=1427+E+14th+St+San+Leandro+CA+94577", mobileOnly: true },
 ];
 
-export default function Navigation() {
+export default function Navigation({ forceScrolled = false }) {
+    const navigate = useNavigate();
+    const location = useLocation();
     const [visible, setVisible] = useState(true);
     const [lastScrollY, setLastScrollY] = useState(0);
     const [mobileOpen, setMobileOpen] = useState(false);
-    const [scrolled, setScrolled] = useState(false);
+    const [scrolled, setScrolled] = useState(forceScrolled);
 
     useEffect(() => {
         const handleScroll = () => {
             const currentY = window.scrollY;
-            setScrolled(currentY > 100);
+            setScrolled(forceScrolled || currentY > 100);
             if (currentY < lastScrollY || currentY < 100) {
                 setVisible(true);
             } else {
@@ -36,6 +41,14 @@ export default function Navigation() {
         setMobileOpen(false);
         if (href.startsWith("http")) {
             window.open(href, "_blank", "noopener,noreferrer");
+            return;
+        }
+        if (href.startsWith("/")) {
+            navigate(href);
+            return;
+        }
+        if (location.pathname !== "/") {
+            navigate("/" + href);
             return;
         }
         const el = document.querySelector(href);
@@ -55,7 +68,7 @@ export default function Navigation() {
                             }`}
                     >
                         <div className="max-w-screen-2xl mx-auto flex items-center justify-between px-6 md:px-12 py-5">
-                            <a href="#" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className={`flex items-center gap-3 font-display text-2xl tracking-[0.3em] font-light transition-colors duration-500 ${scrolled ? "text-foreground" : "text-white"}`}>
+                            <a href="#" onClick={(e) => { e.preventDefault(); if (location.pathname !== "/") { navigate("/"); } else { window.scrollTo({ top: 0, behavior: "smooth" }); } }} className={`flex items-center gap-3 font-display text-2xl tracking-[0.3em] font-light transition-colors duration-500 ${scrolled ? "text-foreground" : "text-white"}`}>
                                 <img src="/logo_transparent.png" alt="Tsuru logo" className={`w-8 h-8 object-contain transition-all duration-500 ${scrolled ? "brightness-0" : "brightness-0 invert"}`} />
                                 TSURU
                             </a>
