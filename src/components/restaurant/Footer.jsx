@@ -7,7 +7,7 @@ export default function Footer() {
     const isInView = useInView(ref, { once: true, margin: "-50px" });
 
     return (
-        <footer ref={ref} className="snap-start py-20 px-6 md:px-12 bg-background relative">
+        <footer id="contact" ref={ref} className="snap-start py-20 px-6 md:px-12 bg-background relative">
             {/* Blade edge top line */}
             <div className="absolute top-0 left-0 right-0 h-px bg-border" />
 
@@ -30,19 +30,22 @@ export default function Footer() {
                     </div>
 
                     <div className="flex items-center gap-8">
-                        <a href="#" className="font-body text-[10px] tracking-[0.2em] uppercase text-muted-foreground hover:text-foreground transition-colors duration-300">
+                        <a href="https://www.instagram.com/tsuru.sushi/" target="_blank" rel="noopener noreferrer" className="font-body text-[10px] tracking-[0.2em] uppercase text-muted-foreground hover:text-foreground transition-colors duration-300">
                             Instagram
                         </a>
-                        <a href="#" className="font-body text-[10px] tracking-[0.2em] uppercase text-muted-foreground hover:text-foreground transition-colors duration-300">
-                            Twitter
+                        <a href="https://www.facebook.com/TsuruSushi.CA/" target="_blank" rel="noopener noreferrer" className="font-body text-[10px] tracking-[0.2em] uppercase text-muted-foreground hover:text-foreground transition-colors duration-300">
+                            Facebook
                         </a>
-                        <a href="#" className="font-body text-[10px] tracking-[0.2em] uppercase text-muted-foreground hover:text-foreground transition-colors duration-300">
+                        <a href="tel:5103523748" className="font-body text-[10px] tracking-[0.2em] uppercase text-muted-foreground hover:text-foreground transition-colors duration-300">
                             Contact
                         </a>
                     </div>
                 </div>
 
-                <div className="mt-6 pt-6 border-t border-border text-center">
+                <div className="mt-6 pt-6 border-t border-border text-center space-y-3">
+                    <p className="font-body text-xs text-muted-foreground">
+                        For catering orders & further inquiries email: <a href="mailto:info@tsurusushi.com" className="text-foreground hover:text-primary transition-colors duration-300">[insert email]</a>
+                    </p>
                     <p className="font-body text-[10px] text-muted-foreground tracking-wider">
                         © 2026 Tsuru. All rights reserved.
                     </p>

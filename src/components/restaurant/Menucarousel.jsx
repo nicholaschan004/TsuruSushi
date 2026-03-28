@@ -1,5 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
+import { Link } from "react-router-dom";
+import { ArrowRight } from "lucide-react";
 
 const MENU_ITEMS = [
     {
@@ -97,11 +99,20 @@ export default function MenuCarousel() {
                             transition={{ duration: 0.8 }}
                         >
                             <p className="font-body text-[10px] tracking-[0.4em] uppercase text-muted-foreground mb-4">
-                                Most Popular
+                                Highlights
                             </p>
-                            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-light text-foreground">
-                                The Menu
-                            </h2>
+                            <div className="flex items-baseline gap-6">
+                                <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-light text-foreground">
+                                    Most Popular
+                                </h2>
+                                <Link
+                                    to="/menu"
+                                    className="inline-flex items-center gap-2 font-body text-xs tracking-[0.2em] uppercase text-muted-foreground hover:text-foreground transition-colors duration-300 group"
+                                >
+                                    View Full Menu
+                                    <ArrowRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1" />
+                                </Link>
+                            </div>
                         </motion.div>
                     </div>
                 </div>

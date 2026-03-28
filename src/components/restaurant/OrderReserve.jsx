@@ -5,23 +5,23 @@ import { ArrowUpRight } from "lucide-react";
 
 const CARDS = [
     {
-        label: "Reservations",
-        heading: "Book a Seat",
+        label: "Delivery & Pickup",
+        heading: "Order on DoorDash",
         description:
-            "Secure your spot at the counter via Resy. We offer two sittings nightly — seats are limited and fill quickly.",
-        cta: "Reserve on Resy",
-        href: "https://resy.com",
-        note: "Powered by Resy",
+            "Get Tsuru delivered to your door or pick it up fresh — nigiri, rolls, and more available on DoorDash.",
+        cta: "Order on DoorDash",
+        href: "https://www.doordash.com/store/tsuru-sushi-san-leandro-78059/2312584/?pickup=true&utm_campaign=gpa",
+        note: "Powered by DoorDash",
         accent: false,
     },
     {
-        label: "Takeout",
-        heading: "Order for Pickup",
+        label: "Delivery & Pickup",
+        heading: "Order on Grubhub",
         description:
-            "Bring Ichigo home. Order our full takeout menu — nigiri, handrolls, and select omakase boxes — via Toast.",
-        cta: "Order on Toast",
-        href: "https://www.toasttab.com",
-        note: "Powered by Toast",
+            "Order our full menu for delivery or pickup through Grubhub — fresh sushi straight from our kitchen to you.",
+        cta: "Order on Grubhub",
+        href: "https://www.grubhub.com/restaurant/tsuru-sushi-japanese-restaurant-1427-e-14th-st-san-leandro/4073528",
+        note: "Powered by Grubhub",
         accent: true,
     },
 ];
@@ -42,12 +42,12 @@ export default function OrderReserve() {
                 >
                     <div className="col-span-12 md:col-span-6 md:col-start-2">
                         <p className="font-body text-[10px] tracking-[0.4em] uppercase text-muted-foreground mb-4">
-                            Dine In or Take Out
+                            Delivery & Pickup
                         </p>
                         <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-light text-foreground leading-tight">
-                            Order &
+                            Order
                             <br />
-                            Reserve
+                            Online
                         </h2>
                     </div>
                 </motion.div>

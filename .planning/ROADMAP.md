@@ -16,6 +16,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 - [ ] **Phase 2: Page Assembly** - Make every section render in the browser and all CTAs functional
 - [ ] **Phase 3: Content and Cleanup** - Populate real restaurant content and remove unused dependencies
 - [ ] **Phase 4: SEO and Deployment** - Add structured data and ship to Vercel
+- [ ] **Phase 5: Full Menu Page** - Build a dedicated menu page with all items, powered by Google Sheets CMS for owner self-service
 
 ## Phase Details
 
@@ -71,6 +72,18 @@ Plans:
   3. A browser's page source includes a JSON-LD Restaurant schema block with address and hours
   4. `npm run build` completes with no errors and produces a clean dist
   5. The site loads and all sections render correctly on iPhone Safari
+**Plans**: TBD
+
+### Phase 5: Full Menu Page
+**Goal**: A separate /menu route displaying the complete menu with all items, categories, prices, and photos — editable by the owner via Google Sheets
+**Depends on**: Phase 4
+**Requirements**: MENU-01, MENU-02, MENU-03
+**Success Criteria** (what must be TRUE):
+  1. Visiting `/menu` shows a dedicated full menu page with all dishes organized by category
+  2. Menu data (names, descriptions, prices, image URLs) is pulled from a Google Sheet
+  3. The owner can update the Google Sheet and changes appear on the site without a redeploy
+  4. The homepage carousel still works as a "highlights" preview linking to the full menu page
+  5. The menu page matches the existing site design (fonts, colors, layout)
 **Plans**: TBD
 
 ## Progress

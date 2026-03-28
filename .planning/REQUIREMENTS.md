@@ -54,6 +54,12 @@ Requirements for initial launch. Each maps to roadmap phases.
 - [ ] **DEPLOY-03**: `npm run build` produces a clean production bundle with no errors
 - [ ] **DEPLOY-04**: Site deployed to Vercel and accessible via public URL
 
+### Full Menu Page
+
+- [ ] **MENU-01**: Dedicated `/menu` route with complete menu organized by category (Nigiri, Rolls, Handrolls, Specials, etc.)
+- [ ] **MENU-02**: Menu data sourced from Google Sheets — owner can edit items, prices, descriptions, and image URLs without a redeploy
+- [ ] **MENU-03**: Homepage menu carousel links to the full menu page
+
 ## v2 Requirements
 
 Deferred to future release. Tracked but not in current roadmap.
@@ -115,6 +121,9 @@ Which phases cover which requirements. Updated during roadmap creation.
 | DEPLOY-02 | Phase 3 | Pending |
 | DEPLOY-03 | Phase 4 | Pending |
 | DEPLOY-04 | Phase 4 | Pending |
+| MENU-01 | Phase 5 | Pending |
+| MENU-02 | Phase 5 | Pending |
+| MENU-03 | Phase 5 | Pending |
 
 **Coverage:**
 - v1 requirements: 22 total
