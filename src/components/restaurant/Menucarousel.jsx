@@ -11,6 +11,14 @@ const MENU_ITEMS = [
         alt: "Three pieces of fresh salmon nigiri on black slate plate"
     },
     {
+        category: "Rolls",
+        name: "Rainbow Roll",
+        description: "California roll base topped with rotating slices of fresh tuna, salmon, yellowtail and avocado.",
+        price: "19.14",
+        image: "https://media.base44.com/images/public/69c4afc75d0284fc64e49e47/4b7e0c0be_generated_image.png",
+        alt: "Rainbow sushi roll topped with colorful fish and avocado"
+    },
+    {
         category: "Nigiri",
         name: "Maguro",
         description: "Lean bluefin tuna. Clean, mineral finish with a whisper of wasabi.",
@@ -33,14 +41,6 @@ const MENU_ITEMS = [
         price: "18",
         image: "https://media.base44.com/images/public/69c4afc75d0284fc64e49e47/bce10d114_generated_fd901bd3.png",
         alt: "Golden sea urchin uni on black ceramic plate"
-    },
-    {
-        category: "Rolls",
-        name: "Rainbow Roll",
-        description: "California roll base topped with rotating slices of fresh tuna, salmon, yellowtail and avocado.",
-        price: "19.14",
-        image: "https://media.base44.com/images/public/69c4afc75d0284fc64e49e47/4b7e0c0be_generated_image.png",
-        alt: "Rainbow sushi roll topped with colorful fish and avocado"
     },
 ];
 
