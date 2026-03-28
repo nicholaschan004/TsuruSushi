@@ -7,7 +7,7 @@ export default function Footer() {
     const isInView = useInView(ref, { once: true, margin: "-50px" });
 
     return (
-        <footer id="contact" ref={ref} className="snap-start py-20 px-6 md:px-12 bg-background relative">
+        <footer id="contact" ref={ref} className="snap-start py-8 px-6 md:px-12 bg-background relative">
             {/* Blade edge top line */}
             <div className="absolute top-0 left-0 right-0 h-px bg-border" />
 

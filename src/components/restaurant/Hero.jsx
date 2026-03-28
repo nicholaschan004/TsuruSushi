@@ -33,7 +33,7 @@ export default function Hero() {
                 style={{ opacity: textOpacity }}
                 className="absolute inset-0 flex flex-col items-center justify-center z-10"
             >
-                <div className="flex items-center overflow-hidden">
+                <div className="flex flex-col items-center overflow-hidden">
                     <motion.span
                         initial={{ opacity: 0, y: 40 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -41,7 +41,7 @@ export default function Hero() {
                         style={{ x: splitLeft }}
                         className="font-display text-6xl sm:text-8xl md:text-9xl lg:text-[10rem] font-light tracking-[0.3em] text-background"
                     >
-                        TSU
+                        TSURU
                     </motion.span>
                     <motion.span
                         initial={{ opacity: 0, y: 40 }}
@@ -50,7 +50,7 @@ export default function Hero() {
                         style={{ x: splitRight }}
                         className="font-display text-6xl sm:text-8xl md:text-9xl lg:text-[10rem] font-light tracking-[0.3em] text-background"
                     >
-                        RU
+                        SUSHI
                     </motion.span>
                 </div>
 

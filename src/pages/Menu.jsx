@@ -166,54 +166,60 @@ export default function Menu() {
             </div>
 
             {/* Menu grid */}
-            <section className="py-8 md:py-12 px-6 md:px-12">
-                <div className="max-w-screen-2xl mx-auto">
-                    {loading ? (
-                        <div className="flex justify-center py-20">
-                            <p className="font-body text-sm text-muted-foreground tracking-[0.2em] uppercase">Loading menu...</p>
-                        </div>
-                    ) : !menuData ? (
-                        <div className="flex justify-center py-20">
-                            <p className="font-body text-sm text-muted-foreground">Unable to load menu. Please try again later.</p>
-                        </div>
-                    ) : (
-                        <AnimatePresence mode="wait">
-                            <motion.div
-                                key={activeCategory}
-                                initial={{ opacity: 0, y: 10 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                exit={{ opacity: 0, y: -10 }}
-                                transition={{ duration: 0.3 }}
-                            >
-                                {activeCategory === "All" ? (
-                                    menuData.categories.map((category) => {
-                                        const sections = menuData.grouped[category];
-                                        if (!sections) return null;
-                                        return (
-                                            <div key={category} className="mb-14 last:mb-0">
-                                                <h2 className="font-display text-2xl md:text-3xl font-medium text-foreground mb-6">
-                                                    {category}
-                                                </h2>
-                                                {Object.entries(sections).map(([sectionName, items]) => (
-                                                    <MenuSection key={sectionName} name={sectionName} categoryName={category} items={items} />
-                                                ))}
-                                            </div>
-                                        );
-                                    })
-                                ) : (
-                                    (() => {
+            {loading ? (
+                <section className="py-8 md:py-12 px-6 md:px-12">
+                    <div className="max-w-screen-2xl mx-auto flex justify-center py-20">
+                        <p className="font-body text-sm text-muted-foreground tracking-[0.2em] uppercase">Loading menu...</p>
+                    </div>
+                </section>
+            ) : !menuData ? (
+                <section className="py-8 md:py-12 px-6 md:px-12">
+                    <div className="max-w-screen-2xl mx-auto flex justify-center py-20">
+                        <p className="font-body text-sm text-muted-foreground">Unable to load menu. Please try again later.</p>
+                    </div>
+                </section>
+            ) : (
+                <AnimatePresence mode="wait">
+                    <motion.div
+                        key={activeCategory}
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -10 }}
+                        transition={{ duration: 0.3 }}
+                    >
+                        {activeCategory === "All" ? (
+                            menuData.categories.map((category, idx) => {
+                                const sections = menuData.grouped[category];
+                                if (!sections) return null;
+                                return (
+                                    <section key={category} className={`py-10 md:py-14 px-6 md:px-12 ${idx % 2 === 0 ? "bg-background" : "bg-secondary"}`}>
+                                        <div className="max-w-screen-2xl mx-auto">
+                                            <h2 className="font-display text-2xl md:text-3xl font-medium text-foreground mb-6">
+                                                {category}
+                                            </h2>
+                                            {Object.entries(sections).map(([sectionName, items]) => (
+                                                <MenuSection key={sectionName} name={sectionName} categoryName={category} items={items} />
+                                            ))}
+                                        </div>
+                                    </section>
+                                );
+                            })
+                        ) : (
+                            <section className="py-10 md:py-14 px-6 md:px-12">
+                                <div className="max-w-screen-2xl mx-auto">
+                                    {(() => {
                                         const sections = menuData.grouped[activeCategory];
                                         if (!sections) return null;
                                         return Object.entries(sections).map(([sectionName, items]) => (
                                             <MenuSection key={sectionName} name={sectionName} categoryName={activeCategory} items={items} />
                                         ));
-                                    })()
-                                )}
-                            </motion.div>
-                        </AnimatePresence>
-                    )}
-                </div>
-            </section>
+                                    })()}
+                                </div>
+                            </section>
+                        )}
+                    </motion.div>
+                </AnimatePresence>
+            )}
 
             <Footer />
         </div>
