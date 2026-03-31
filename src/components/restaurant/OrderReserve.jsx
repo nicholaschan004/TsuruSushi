@@ -24,6 +24,16 @@ const CARDS = [
         note: "Powered by Grubhub",
         accent: true,
     },
+    {
+        label: "Delivery & Pickup",
+        heading: "Order on Uber Eats",
+        description:
+            "Craving sushi? Order Tsuru for delivery or pickup through Uber Eats — quick, easy, and always fresh.",
+        cta: "Order on Uber Eats",
+        href: "https://www.ubereats.com/store/tsuru-sushi-japanese-restaurant/mwIEYF8XWNCkri-zaJby1Q?diningMode=PICKUP",
+        note: "Powered by Uber Eats",
+        accent: false,
+    },
 ];
 
 export default function OrderReserve() {
@@ -53,17 +63,16 @@ export default function OrderReserve() {
                 </motion.div>
 
                 {/* Cards */}
-                <div className="grid grid-cols-12 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                     {CARDS.map((card, i) => (
                         <motion.div
-                            key={card.label}
+                            key={card.heading}
                             initial={{ opacity: 0, y: 40 }}
                             animate={isInView ? { opacity: 1, y: 0 } : {}}
                             transition={{ duration: 0.7, delay: i * 0.15 }}
-                            className={`col-span-12 md:col-span-5 ${i === 0 ? "md:col-start-2" : "md:col-start-7"}`}
                         >
                             <div
-                                className={`h-full flex flex-col justify-between p-10 md:p-14 border border-border ${card.accent ? "bg-foreground text-background" : "bg-background text-foreground"
+                                className={`h-full flex flex-col justify-between p-8 md:p-10 border border-border ${card.accent ? "bg-foreground text-background" : "bg-background text-foreground"
                                     }`}
                             >
                                 <div>
@@ -73,7 +82,7 @@ export default function OrderReserve() {
                                     >
                                         {card.label}
                                     </p>
-                                    <h3 className="font-display text-3xl md:text-4xl font-light leading-tight">
+                                    <h3 className="font-display text-2xl md:text-3xl font-light leading-tight">
                                         {card.heading}
                                     </h3>
                                     <p
@@ -84,12 +93,12 @@ export default function OrderReserve() {
                                     </p>
                                 </div>
 
-                                <div className="mt-12">
+                                <div className="mt-8">
                                     <a
                                         href={card.href}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className={`inline-flex items-center gap-3 px-8 py-4 font-body text-xs tracking-[0.3em] uppercase transition-all duration-300 group ${card.accent
+                                        className={`inline-flex items-center gap-2 px-5 py-3 md:px-6 md:py-3 font-body text-[10px] md:text-xs tracking-[0.2em] uppercase transition-all duration-300 group ${card.accent
                                                 ? "bg-primary text-primary-foreground hover:bg-primary/90"
                                                 : "bg-foreground text-background hover:bg-foreground/90"
                                             }`}

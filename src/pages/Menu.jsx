@@ -151,7 +151,7 @@ export default function Menu() {
                         {categories.map((cat) => (
                             <button
                                 key={cat}
-                                onClick={() => setActiveCategory(cat)}
+                                onClick={() => { setActiveCategory(cat); window.scrollTo({ top: 0 }); }}
                                 className={`font-body text-xs tracking-[0.2em] uppercase whitespace-nowrap transition-colors duration-300 pb-1 ${
                                     activeCategory === cat
                                         ? "text-foreground border-b border-foreground"

@@ -26,7 +26,11 @@ const HOURS = [
     { day: "Sunday", lunch: null, dinner: "12:00 PM — 9:30 PM" },
 ];
 
-const TODAY = new Date().toLocaleDateString("en-US", { weekday: "long" });
+const NOW = new Date();
+const TODAY = NOW.toLocaleDateString("en-US", { weekday: "long" });
+const CURRENT_HOUR = NOW.getHours() + NOW.getMinutes() / 60; // e.g. 16.5 = 4:30 PM
+const IS_LUNCH = CURRENT_HOUR >= 11 && CURRENT_HOUR < 16;    // 11:00 AM — 4:00 PM
+const IS_DINNER = CURRENT_HOUR >= 16 && CURRENT_HOUR < 21.5; // 4:00 PM — 9:30 PM
 
 const POSITION = [37.7249, -122.1561]; // 1427 E 14th St, San Leandro, CA
 
@@ -48,10 +52,8 @@ export default function MapHours() {
                     <p className="font-body text-[10px] tracking-[0.4em] uppercase text-muted-foreground mb-4">
                         Hours of Service
                     </p>
-                    <h2 className="font-display text-4xl md:text-5xl font-light text-foreground leading-tight mb-10">
-                        When to
-                        <br />
-                        Visit
+                    <h2 className="font-display text-2xl md:text-3xl font-light text-foreground leading-tight mb-5">
+                        When to Visit
                     </h2>
 
                     <div className="space-y-0">
@@ -63,7 +65,7 @@ export default function MapHours() {
                                     initial={{ opacity: 0, x: -15 }}
                                     animate={isInView ? { opacity: 1, x: 0 } : {}}
                                     transition={{ duration: 0.5, delay: 0.1 + i * 0.07 }}
-                                    className="py-4 border-b border-border"
+                                    className="py-2 border-b border-border"
                                 >
                                     <div className="flex items-center gap-3 mb-1.5">
                                         {isToday && (
@@ -76,15 +78,15 @@ export default function MapHours() {
                                     <div className="flex flex-col gap-0.5 pl-4 md:pl-5">
                                         {row.lunch && (
                                             <div className="flex items-baseline justify-between">
-                                                <span className={`font-body text-[10px] tracking-[0.2em] uppercase ${isToday ? "text-muted-foreground" : "text-muted-foreground/60"}`}>Lunch</span>
-                                                <span className={`font-body text-xs ${isToday ? "text-primary" : "text-muted-foreground"}`}>{row.lunch}</span>
+                                                <span className={`font-body text-[10px] tracking-[0.2em] uppercase ${isToday && IS_LUNCH ? "text-muted-foreground" : "text-muted-foreground/60"}`}>Lunch</span>
+                                                <span className={`font-body text-xs ${isToday && IS_LUNCH ? "text-primary" : "text-muted-foreground"}`}>{row.lunch}</span>
                                             </div>
                                         )}
                                         <div className="flex items-baseline justify-between">
-                                            <span className={`font-body text-[10px] tracking-[0.2em] uppercase ${isToday ? "text-muted-foreground" : "text-muted-foreground/60"}`}>
+                                            <span className={`font-body text-[10px] tracking-[0.2em] uppercase ${isToday && IS_DINNER ? "text-muted-foreground" : "text-muted-foreground/60"}`}>
                                                 {row.lunch ? "Dinner" : "Open"}
                                             </span>
-                                            <span className={`font-body text-xs ${isToday ? "text-primary" : "text-muted-foreground"}`}>{row.dinner}</span>
+                                            <span className={`font-body text-xs ${isToday && IS_DINNER ? "text-primary" : "text-muted-foreground"}`}>{row.dinner}</span>
                                         </div>
                                     </div>
                                 </motion.div>
@@ -109,9 +111,9 @@ export default function MapHours() {
                     initial={{ opacity: 0, x: 40 }}
                     animate={isInView ? { opacity: 1, x: 0 } : {}}
                     transition={{ duration: 1, delay: 0.2 }}
-                    className="col-span-12 md:col-span-6 md:col-start-7"
+                    className="col-span-12 md:col-span-6 md:col-start-7 flex flex-col"
                 >
-                    <div className="relative overflow-hidden" style={{ height: "520px" }}>
+                    <div className="relative overflow-hidden flex-1 min-h-[260px]">
                         <MapContainer
                             center={POSITION}
                             zoom={15}
@@ -138,16 +140,12 @@ export default function MapHours() {
                     </div>
 
                     {/* Address bar beneath map */}
-                    <div className="mt-6 py-4 border-t border-b border-border space-y-3">
-                        <div className="flex items-start justify-between">
-                            <div>
-                                <p className="font-display text-lg font-light text-foreground">
-                                    1427 E 14th St
-                                </p>
-                                <p className="font-body text-xs text-muted-foreground mt-0.5">
-                                    San Leandro, CA 94577
-                                </p>
-                                <a href="tel:5103523748" className="font-body text-xs text-muted-foreground hover:text-foreground transition-colors duration-300 mt-1 block">
+                    <div className="mt-4 py-3 border-t border-b border-border">
+                        <div className="flex items-center justify-between">
+                            <div className="flex items-center gap-2">
+                                <span className="font-display text-sm font-light text-foreground">1427 E 14th St, San Leandro, CA 94577</span>
+                                <span className="text-muted-foreground/30">|</span>
+                                <a href="tel:5103523748" className="font-body text-xs text-muted-foreground hover:text-foreground transition-colors duration-300">
                                     (510) 352-3748
                                 </a>
                             </div>
