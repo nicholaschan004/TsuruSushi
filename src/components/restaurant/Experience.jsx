@@ -41,33 +41,33 @@ export default function Experience() {
                         <h2 className="font-display text-4xl md:text-5xl font-light text-foreground leading-tight">
                             Chef's
                             <br />
-                            Daily Special
+                            Special
                         </h2>
                         <p className="font-body text-sm text-muted-foreground mt-6 leading-[1.8]">
-                            Discover our curated selection of ultra-premium Chirashi and Sashimi.
+                            Discover our curated selection of premium nigiri and seasonal specialties.
                             Hand-selected daily from the morning's finest catch.
                         </p>
                         <div className="mt-10 space-y-4">
                             <div className="flex flex-col py-3 border-b border-border">
                                 <div className="flex items-baseline justify-between w-full">
-                                    <span className="font-display text-lg font-light">Chirashi</span>
-                                    <span className="font-body text-sm text-muted-foreground">$39.95</span>
+                                    <span className="font-display text-lg font-light">Aburi Salmon</span>
+                                    <span className="font-body text-sm text-muted-foreground">$8.50</span>
                                 </div>
-                                <p className="font-body text-[10px] text-muted-foreground mt-1 uppercase tracking-wider">Assorted raw fish over sushi rice</p>
+                                <p className="font-body text-[10px] text-muted-foreground mt-1 uppercase tracking-wider">(2pcs) Seared salmon nigiri glazed over house sauce</p>
                             </div>
                             <div className="flex flex-col py-3 border-b border-border">
                                 <div className="flex items-baseline justify-between w-full">
-                                    <span className="font-display text-lg font-light">Moriawase Sashimi</span>
-                                    <span className="font-body text-sm text-muted-foreground">$39.95</span>
+                                    <span className="font-display text-lg font-light">Wagyu Nigiri</span>
+                                    <span className="font-body text-sm text-muted-foreground">$17.95</span>
                                 </div>
-                                <p className="font-body text-[10px] text-muted-foreground mt-1 uppercase tracking-wider">Assorted raw fish</p>
+                                <p className="font-body text-[10px] text-muted-foreground mt-1 uppercase tracking-wider">(2pcs) Seared A5 wagyu beef glazed over house sauce, topped with ginger and green onion</p>
                             </div>
                             <div className="flex flex-col py-3 border-b border-border">
                                 <div className="flex items-baseline justify-between w-full">
-                                    <span className="font-display text-lg font-light">Tsuru Sashimi</span>
-                                    <span className="font-body text-sm text-muted-foreground">$78.00</span>
+                                    <span className="font-display text-lg font-light">Hamachi Kama</span>
+                                    <span className="font-body text-sm text-muted-foreground">MKT Price</span>
                                 </div>
-                                <p className="font-body text-[10px] text-muted-foreground mt-1 uppercase tracking-wider">House assorted raw fish</p>
+                                <p className="font-body text-[10px] text-muted-foreground mt-1 uppercase tracking-wider">Appetizer</p>
                             </div>
                         </div>
                     </motion.div>

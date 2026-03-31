@@ -29,7 +29,7 @@ export default function Footer() {
                         </span>
                     </div>
 
-                    <div className="flex items-center gap-8">
+                    <div className="flex items-center gap-5 md:gap-8">
                         <a href="https://www.instagram.com/tsuru.sushi/" target="_blank" rel="noopener noreferrer" className="font-body text-[10px] tracking-[0.2em] uppercase text-muted-foreground hover:text-foreground transition-colors duration-300">
                             Instagram
                         </a>
@@ -44,7 +44,7 @@ export default function Footer() {
 
                 <div className="mt-6 pt-6 border-t border-border text-center space-y-3">
                     <p className="font-body text-xs text-muted-foreground">
-                        For catering orders & further inquiries email: <a href="mailto:info@tsurusushi.com" className="text-foreground hover:text-primary transition-colors duration-300">[insert email]</a>
+                        For catering orders & further inquiries email: <a href="mailto:Suntsuru1@gmail.com" className="text-foreground hover:text-primary transition-colors duration-300">Suntsuru1@gmail.com</a>
                     </p>
                     <p className="font-body text-[10px] text-muted-foreground tracking-wider">
                         © 2026 Tsuru. All rights reserved.

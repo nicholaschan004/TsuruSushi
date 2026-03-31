@@ -7,7 +7,7 @@ const NAV_LINKS = [
     { label: "Menu", href: "/menu" },
     { label: "Experience", href: "#experience" },
     { label: "Highlights", href: "#menu" },
-    { label: "Source", href: "#provenance" },
+    { label: "About", href: "#about" },
     { label: "Order Online", href: "#order" },
     { label: "Hours", href: "#hours" },
     { label: "Contact", href: "#contact" },
@@ -68,9 +68,12 @@ export default function Navigation({ forceScrolled = false }) {
                             }`}
                     >
                         <div className="max-w-screen-2xl mx-auto flex items-center justify-between px-6 md:px-12 py-5">
-                            <a href="#" onClick={(e) => { e.preventDefault(); if (location.pathname !== "/") { navigate("/"); } else { window.scrollTo({ top: 0, behavior: "smooth" }); } }} className={`flex items-center gap-3 font-display text-2xl tracking-[0.3em] font-light transition-colors duration-500 ${scrolled ? "text-foreground" : "text-white"}`}>
+                            <a href="#" onClick={(e) => { e.preventDefault(); if (location.pathname !== "/") { navigate("/"); } else { window.scrollTo({ top: 0, behavior: "smooth" }); } }} className={`flex items-center gap-3 transition-colors duration-500 ${scrolled ? "text-foreground" : "text-white"}`}>
                                 <img src="/tablogo.png" alt="Tsuru logo" className="w-8 h-8 object-contain" />
-                                TSURU
+                                <div className="flex flex-col">
+                                    <span className="font-display text-base sm:text-xl tracking-[0.3em] font-light leading-tight">TSURU SUSHI</span>
+                                    <span className="font-body text-[7px] sm:text-[8px] tracking-[0.3em] uppercase opacity-60 leading-tight">Japanese Restaurant</span>
+                                </div>
                             </a>
 
                             <nav className="hidden md:flex items-center gap-10">
@@ -116,7 +119,7 @@ export default function Navigation({ forceScrolled = false }) {
                         >
                             <X className="w-5 h-5" />
                         </button>
-                        <div className="flex flex-col items-center gap-8">
+                        <div className="flex flex-col items-center gap-6">
                             {NAV_LINKS.map((link, i) => (
                                 <motion.button
                                     key={link.label}
@@ -124,7 +127,7 @@ export default function Navigation({ forceScrolled = false }) {
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ delay: i * 0.1 }}
                                     onClick={() => scrollTo(link.href)}
-                                    className="font-display text-3xl font-light tracking-[0.2em] text-foreground"
+                                    className="font-display text-2xl font-light tracking-[0.2em] text-foreground"
                                 >
                                     {link.label}
                                 </motion.button>
