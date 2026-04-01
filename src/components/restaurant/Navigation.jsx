@@ -5,8 +5,8 @@ import { useNavigate, useLocation } from "react-router-dom";
 
 const NAV_LINKS = [
     { label: "Menu", href: "/menu" },
-    { label: "Experience", href: "#experience" },
-    { label: "Highlights", href: "#menu" },
+    { label: "Chef's Special", href: "#experience" },
+    { label: "Most Popular", href: "#menu" },
     { label: "About", href: "#about" },
     { label: "Order Online", href: "#order" },
     { label: "Hours", href: "#hours" },
@@ -48,7 +48,7 @@ export default function Navigation({ forceScrolled = false }) {
             return;
         }
         if (location.pathname !== "/") {
-            navigate("/" + href);
+            navigate("/", { state: { scrollTo: href } });
             return;
         }
         const el = document.querySelector(href);
