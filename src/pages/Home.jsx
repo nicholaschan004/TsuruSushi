@@ -33,8 +33,8 @@ export default function Home() {
             <Hero />
             <Experience />
             <MenuCarousel />
-            <Provenance />
             <OrderReserve />
+            <Provenance />
             <MapHours />
             <Footer />
         </div>
