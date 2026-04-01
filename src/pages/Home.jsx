@@ -14,17 +14,18 @@ export default function Home() {
     const isFirstRender = useRef(true)
 
     useEffect(() => {
-        if (isFirstRender.current) {
+        const target = location.state?.scrollTo || location.hash
+        if (!target) return
+        if (isFirstRender.current && !location.state?.scrollTo) {
             isFirstRender.current = false
             return
         }
-        if (location.hash) {
-            const el = document.querySelector(location.hash)
-            if (el) {
-                setTimeout(() => el.scrollIntoView({ behavior: "smooth" }), 100)
-            }
-        }
-    }, [location.hash])
+        isFirstRender.current = false
+        setTimeout(() => {
+            const el = document.querySelector(target)
+            if (el) el.scrollIntoView({ behavior: "smooth" })
+        }, 100)
+    }, [location.state, location.hash])
 
     return (
         <div className="min-h-screen bg-background">
