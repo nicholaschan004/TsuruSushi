@@ -3,21 +3,9 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 
 const PILLARS = [
-    {
-        number: "01",
-        title: "Quality",
-        description: "Only the finest cuts make it to our counter — sourced daily, never frozen.",
-    },
-    {
-        number: "02",
-        title: "Tradition",
-        description: "Rooted in classical technique passed down through generations of itamae.",
-    },
-    {
-        number: "03",
-        title: "Craft",
-        description: "Every piece is shaped by hand with precision, patience, and respect for the ingredient.",
-    },
+    { number: "01", title: "Quality" },
+    { number: "02", title: "Craftsmanship" },
+    { number: "03", title: "Experience" },
 ];
 
 export default function Provenance() {
@@ -81,18 +69,13 @@ export default function Provenance() {
                                 <div className="absolute left-0 top-0 w-px h-full bg-background/10" />
                                 <div className="absolute -left-1 top-1/2 w-2 h-px bg-primary" />
 
-                                <div className="pl-6">
-                                    <div className="flex items-baseline gap-4 mb-2">
-                                        <span className="font-body text-[10px] tracking-[0.3em] uppercase text-primary">
-                                            {pillar.number}
-                                        </span>
-                                        <h3 className="font-display text-xl md:text-2xl font-light">
-                                            {pillar.title}
-                                        </h3>
-                                    </div>
-                                    <p className="font-body text-xs text-background/50 leading-[1.8]">
-                                        {pillar.description}
-                                    </p>
+                                <div className="flex items-baseline gap-4 justify-center">
+                                    <span className="font-body text-[10px] tracking-[0.3em] uppercase text-primary">
+                                        {pillar.number}
+                                    </span>
+                                    <h3 className="font-display text-3xl md:text-4xl font-light">
+                                        {pillar.title}
+                                    </h3>
                                 </div>
                             </motion.div>
                         ))}

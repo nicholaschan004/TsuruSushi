@@ -26,17 +26,18 @@ const HOURS = [
     { day: "Sunday", lunch: null, dinner: "12:00 PM — 9:30 PM" },
 ];
 
-const NOW = new Date();
-const TODAY = NOW.toLocaleDateString("en-US", { weekday: "long" });
-const CURRENT_HOUR = NOW.getHours() + NOW.getMinutes() / 60; // e.g. 16.5 = 4:30 PM
-const IS_LUNCH = CURRENT_HOUR >= 11 && CURRENT_HOUR < 16;    // 11:00 AM — 4:00 PM
-const IS_DINNER = CURRENT_HOUR >= 16 && CURRENT_HOUR < 21.5; // 4:00 PM — 9:30 PM
-
 const POSITION = [37.7249, -122.1561]; // 1427 E 14th St, San Leandro, CA
 
 export default function MapHours() {
     const ref = useRef(null);
     const isInView = useInView(ref, { once: true, margin: "-100px" });
+
+    const now = new Date();
+    const today = now.toLocaleDateString("en-US", { weekday: "long" });
+    const currentHour = now.getHours() + now.getMinutes() / 60;
+    const isSunday = today === "Sunday";
+    const isLunch = !isSunday && currentHour >= 11 && currentHour < 16;
+    const isDinner = isSunday ? currentHour >= 12 && currentHour < 21.5 : currentHour >= 16 && currentHour < 21.5;
 
     return (
         <section id="hours" ref={ref} className="min-h-screen flex flex-col justify-center py-16 md:py-24 px-6 md:px-12 max-w-screen-2xl mx-auto">
@@ -58,7 +59,7 @@ export default function MapHours() {
 
                     <div className="space-y-0">
                         {HOURS.map((row, i) => {
-                            const isToday = row.day === TODAY;
+                            const isToday = row.day === today;
                             return (
                                 <motion.div
                                     key={row.day}
@@ -78,15 +79,15 @@ export default function MapHours() {
                                     <div className="flex flex-col gap-0.5 pl-4 md:pl-5">
                                         {row.lunch && (
                                             <div className="flex items-baseline justify-between">
-                                                <span className={`font-body text-[10px] tracking-[0.2em] uppercase ${isToday && IS_LUNCH ? "text-muted-foreground" : "text-muted-foreground/60"}`}>Lunch</span>
-                                                <span className={`font-body text-xs ${isToday && IS_LUNCH ? "text-primary" : "text-muted-foreground"}`}>{row.lunch}</span>
+                                                <span className={`font-body text-[10px] tracking-[0.2em] uppercase ${isToday && isLunch ? "text-primary" : "text-muted-foreground/60"}`}>Lunch</span>
+                                                <span className={`font-body text-xs ${isToday && isLunch ? "text-primary" : "text-muted-foreground"}`}>{row.lunch}</span>
                                             </div>
                                         )}
                                         <div className="flex items-baseline justify-between">
-                                            <span className={`font-body text-[10px] tracking-[0.2em] uppercase ${isToday && IS_DINNER ? "text-muted-foreground" : "text-muted-foreground/60"}`}>
+                                            <span className={`font-body text-[10px] tracking-[0.2em] uppercase ${isToday && isDinner ? "text-primary" : "text-muted-foreground/60"}`}>
                                                 {row.lunch ? "Dinner" : "Open"}
                                             </span>
-                                            <span className={`font-body text-xs ${isToday && IS_DINNER ? "text-primary" : "text-muted-foreground"}`}>{row.dinner}</span>
+                                            <span className={`font-body text-xs ${isToday && isDinner ? "text-primary" : "text-muted-foreground"}`}>{row.dinner}</span>
                                         </div>
                                     </div>
                                 </motion.div>
