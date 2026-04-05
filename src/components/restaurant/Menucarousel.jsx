@@ -2,38 +2,20 @@ import React, { useRef, useState, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
+import { fetchSheet } from "@/lib/google-sheets";
 
-const MENU_ITEMS = [
-    {
-        category: "Rolls",
-        name: "E14 Roll",
-        image: "https://media.base44.com/images/public/69c4afc75d0284fc64e49e47/4b7e0c0be_generated_image.png",
-        alt: "E14 specialty roll"
-    },
-    {
-        category: "Rolls",
-        name: "Dragon Roll",
-        image: "https://media.base44.com/images/public/69c4afc75d0284fc64e49e47/4b7e0c0be_generated_image.png",
-        alt: "Dragon roll topped with avocado and unagi sauce"
-    },
-    {
-        category: "Rolls",
-        name: "Lion King Roll",
-        image: "https://media.base44.com/images/public/69c4afc75d0284fc64e49e47/4b7e0c0be_generated_image.png",
-        alt: "Lion King specialty roll"
-    },
-    {
-        category: "Rolls",
-        name: "Tiger Roll",
-        image: "https://media.base44.com/images/public/69c4afc75d0284fc64e49e47/4b7e0c0be_generated_image.png",
-        alt: "Tiger specialty roll"
-    },
-    {
-        category: "Rolls",
-        name: "Badass Roll",
-        image: "https://media.base44.com/images/public/69c4afc75d0284fc64e49e47/4b7e0c0be_generated_image.png",
-        alt: "Badass specialty roll"
-    },
+const DEFAULT_IMAGE = "https://media.base44.com/images/public/69c4afc75d0284fc64e49e47/4b7e0c0be_generated_image.png";
+
+const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSzAu9nbAJtnbgol4C2LNlNh3HyxJs84W8mfVEtz_r44KzApHlOSFQdzdD_a_5nH7APxsWgu66RWtER/pub?gid=1217918855&single=true&output=csv";
+
+const FALLBACK = [
+    { category: "Rolls", name: "E14 Roll", desc: "Shrimp tempura, tobiko, black tobiko, avocado & creamy spicy sauce", image: DEFAULT_IMAGE },
+    { category: "Rolls", name: "Dragon Roll", desc: "Shrimp tempura, and assorted vegetables topped with unagi, avocado, tobiko, wasabi tobiko, and sweet house sauce", image: DEFAULT_IMAGE },
+    { category: "Rolls", name: "Lion King Roll", desc: "Baked salmon over california roll topped tobiko and specialty sauce", image: DEFAULT_IMAGE },
+    { category: "Rolls", name: "Tiger Roll", desc: "(8pcs) Deep fried assorted fish with specialty sauce", image: DEFAULT_IMAGE },
+    { category: "Rolls", name: "Badass Roll", desc: "Shrimp tempura, spicy tuna, topped with tuna, salmon, avocado, tempura crumbs, and sweet house sauce", image: DEFAULT_IMAGE },
+    { category: "Rolls", name: "Rainbow Roll", desc: "(8pcs) Assorted raw fish on top of California roll", image: DEFAULT_IMAGE },
+    { category: "Rolls", name: "Crunchy Roll", desc: "Deep fried shrimp tempura, kani, coated in crispy tempura crumbs, drizzled with sweet house sauce", image: DEFAULT_IMAGE },
 ];
 
 export default function MenuCarousel() {
@@ -41,6 +23,21 @@ export default function MenuCarousel() {
     const sectionRef = useRef(null);
     const hasSnapped = useRef(false);
     const isInView = useInView(sectionRef, { once: true, margin: "-100px" });
+    const [items, setItems] = useState(FALLBACK);
+
+    useEffect(() => {
+        fetchSheet(SHEET_URL)
+            .then((rows) => {
+                const parsed = rows.map((r) => ({
+                    category: r.category || "Rolls",
+                    name: r.name || r.item_name || "",
+                    desc: r.description || "",
+                    image: r.image || r.image_url || DEFAULT_IMAGE,
+                })).filter((item) => item.name);
+                if (parsed.length > 0) setItems(parsed);
+            })
+            .catch(() => {});
+    }, []);
 
     useEffect(() => {
         if (!sectionRef.current) return;
@@ -113,7 +110,7 @@ export default function MenuCarousel() {
                 ref={scrollRef}
                 className="flex gap-6 overflow-x-auto hide-scrollbar px-6 md:px-12 pb-4"
             >
-                {MENU_ITEMS.map((item, i) => (
+                {items.map((item, i) => (
                     <motion.div
                         key={item.name}
                         initial={{ opacity: 0, y: 40 }}
@@ -124,7 +121,7 @@ export default function MenuCarousel() {
                         <div className="relative overflow-hidden bg-secondary aspect-[3/4]">
                             <img
                                 src={item.image}
-                                alt={item.alt}
+                                alt={item.name}
                                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                             />
                             {/* Overlay info on hover */}
@@ -139,6 +136,11 @@ export default function MenuCarousel() {
                             <h3 className="font-display text-2xl md:text-3xl font-light text-foreground">
                                 {item.name}
                             </h3>
+                            {item.desc && (
+                                <p className="font-body text-xs text-muted-foreground mt-2 leading-relaxed">
+                                    {item.desc}
+                                </p>
+                            )}
                         </div>
                     </motion.div>
                 ))}

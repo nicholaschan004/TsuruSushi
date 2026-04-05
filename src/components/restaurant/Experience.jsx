@@ -1,16 +1,20 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
+import { fetchSheet } from "@/lib/google-sheets";
 
 const OMAKASE_IMG = "https://media.base44.com/images/public/69c4afc75d0284fc64e49e47/94034c906_generated_b72e7551.png";
 
-const SPECIALS = [
+const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSzAu9nbAJtnbgol4C2LNlNh3HyxJs84W8mfVEtz_r44KzApHlOSFQdzdD_a_5nH7APxsWgu66RWtER/pub?gid=1668082783&single=true&output=csv";
+
+const FALLBACK = [
     { name: "Aburi Salmon", price: "$8.50", desc: "(2pcs) Seared salmon nigiri glazed over house sauce" },
     { name: "Wagyu Nigiri", price: "$17.95", desc: "(2pcs) Seared A5 wagyu beef glazed over house sauce, topped with ginger and green onion" },
-    { name: "Hamachi Kama", price: "MKT Price", desc: "Appetizer" },
-    { name: "Grilled Yellowtail Fish Collar", price: "$25.95" },
-    { name: "Uni", price: "$15.95", desc: "Sea urchin — Japan | Santa Barbara" },
-    { name: "Mentaiko", desc: "Spicy, salted, and cured pollock egg" },
+    { name: "Hamachi Kama", price: "$25.95", desc: "Grilled yellowtail fish collar" },
+    { name: "Uni (Japan)", price: "$25.95", desc: "Sea urchin" },
+    { name: "Uni (Santa Barbara)", price: "$15.95", desc: "Sea urchin" },
+    { name: "Blue Shrimp", price: "MKT Price" },
+    { name: "Blue Fin Tuna", price: "$8.95" },
     { name: "Otoro", desc: "Premium bluefin tuna belly" },
     { name: "Sake Toro", desc: "Premium cut salmon belly" },
     { name: "Ikamaruyaki", desc: "Grilled squid" },
@@ -20,6 +24,20 @@ const SPECIALS = [
 export default function Experience() {
     const ref = useRef(null);
     const isInView = useInView(ref, { once: true, margin: "-100px" });
+    const [specials, setSpecials] = useState(FALLBACK);
+
+    useEffect(() => {
+        fetchSheet(SHEET_URL)
+            .then((rows) => {
+                const items = rows.map((r) => ({
+                    name: r.name || r.item_name || "",
+                    price: r.price || "",
+                    desc: r.description || "",
+                })).filter((item) => item.name);
+                if (items.length > 0) setSpecials(items);
+            })
+            .catch(() => {});
+    }, []);
 
     return (
         <section id="experience" ref={ref} className="snap-start py-16 md:py-24 bg-secondary">
@@ -69,7 +87,7 @@ export default function Experience() {
                     transition={{ duration: 0.8, delay: 0.5 }}
                     className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-0"
                 >
-                    {SPECIALS.map((item) => (
+                    {specials.map((item) => (
                         <div key={item.name} className="flex flex-col py-3 border-b border-border">
                             <div className="flex items-baseline justify-between w-full">
                                 <span className="font-display text-lg font-light">{item.name}</span>

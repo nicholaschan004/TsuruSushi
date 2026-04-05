@@ -21,7 +21,7 @@ export default function Footer() {
                 <div className="flex flex-col md:flex-row items-center justify-between gap-6">
                     <div className="flex flex-col md:flex-row items-center gap-4 md:gap-8">
                         <span className="font-display text-sm tracking-[0.2em] text-foreground">
-                            TSURU
+                            TSURU SUSHI
                         </span>
                         <span className="h-px w-8 bg-border hidden md:block" />
                         <span className="font-body text-xs text-muted-foreground">
@@ -47,7 +47,7 @@ export default function Footer() {
                         For catering orders & further inquiries email: <a href="mailto:Suntsuru1@gmail.com" className="text-foreground hover:text-primary transition-colors duration-300">Suntsuru1@gmail.com</a>
                     </p>
                     <p className="font-body text-[10px] text-muted-foreground tracking-wider">
-                        © 2026 Tsuru. All rights reserved.
+                        © 2026 Tsuru Sushi. All rights reserved.
                     </p>
                 </div>
             </motion.div>
