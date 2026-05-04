@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { fetchSheet, toDirectImageUrl, preloadImage } from "@/lib/google-sheets";
+import { InlineMarkdown } from "@/lib/InlineMarkdown";
 
-const FALLBACK_SUBTITLE = "— San Leandro Chamber of Commerce Award Honoree —";
+const FALLBACK_SUBTITLES = ["— San Leandro Chamber of Commerce Award Honoree —"];
 
 const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSzAu9nbAJtnbgol4C2LNlNh3HyxJs84W8mfVEtz_r44KzApHlOSFQdzdD_a_5nH7APxsWgu66RWtER/pub?gid=294905546&single=true&output=csv";
 
@@ -14,20 +15,21 @@ export default function Hero() {
     const splitRight = useTransform(scrollY, [0, 600], [0, 120]);
 
     const [heroImg, setHeroImg] = useState(null);
-    const [subtitle, setSubtitle] = useState(FALLBACK_SUBTITLE);
+    const [subtitles, setSubtitles] = useState(FALLBACK_SUBTITLES);
 
     useEffect(() => {
         fetchSheet(SHEET_URL)
             .then((rows) => {
                 if (rows.length > 0) {
-                    const row = rows[0];
-                    const img = toDirectImageUrl(row.image || row.image_url);
+                    const img = toDirectImageUrl(rows[0].image || rows[0].image_url);
                     if (img) {
                         preloadImage(img);
                         setHeroImg(img);
                     }
-                    const sub = row.subtitle || row.tagline;
-                    if (sub) setSubtitle(sub);
+                    const subs = rows
+                        .map((r) => r.subtitle || r.tagline)
+                        .filter(Boolean);
+                    if (subs.length > 0) setSubtitles(subs);
                 }
             })
             .catch(() => {});
@@ -85,9 +87,11 @@ export default function Hero() {
                     transition={{ delay: 0.8, duration: 1 }}
                     className="mt-6 flex flex-col items-center gap-3"
                 >
-                    <p className="font-body text-[10px] tracking-[0.25em] uppercase text-background/50 text-center px-4">
-                        {subtitle}
-                    </p>
+                    {subtitles.map((sub, i) => (
+                        <p key={i} className="font-body text-[10px] tracking-[0.25em] uppercase text-background/50 text-center px-4">
+                            <InlineMarkdown text={sub} />
+                        </p>
+                    ))}
                 </motion.div>
 
                 {/* Scroll indicator */}
