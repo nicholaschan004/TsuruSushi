@@ -196,7 +196,7 @@ export default function Menu() {
                                     <section key={category} className={`py-10 md:py-14 px-6 md:px-12 ${idx % 2 === 0 ? "bg-background" : "bg-secondary"}`}>
                                         <div className="max-w-screen-2xl mx-auto">
                                             <h2 className="font-display text-2xl md:text-3xl font-medium text-foreground mb-6">
-                                                {category}
+                                                <InlineMarkdown text={category} />
                                             </h2>
                                             {Object.entries(sections).map(([sectionName, items]) => (
                                                 <MenuSection key={sectionName} name={sectionName} categoryName={category} items={items} />
@@ -244,7 +244,7 @@ function MenuSection({ name, categoryName, items }) {
                     transition={{ duration: 0.5 }}
                     className="font-display text-lg md:text-xl font-light text-foreground mb-4"
                 >
-                    {name}
+                    <InlineMarkdown text={name} />
                 </motion.h3>
             )}
             <div className={isOptions ? "grid grid-cols-1 gap-y-0" : "grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-0"}>
