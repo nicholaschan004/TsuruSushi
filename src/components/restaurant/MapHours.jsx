@@ -23,7 +23,7 @@ const HOURS = [
     { day: "Thursday", lunch: "11:00 AM — 4:00 PM", dinner: "4:00 PM — 9:30 PM" },
     { day: "Friday", lunch: "11:00 AM — 4:00 PM", dinner: "4:00 PM — 9:30 PM" },
     { day: "Saturday", lunch: "11:00 AM — 4:00 PM", dinner: "4:00 PM — 9:30 PM" },
-    { day: "Sunday", lunch: null, dinner: "12:00 PM — 9:30 PM" },
+    { day: "Sunday", lunch: "12:00 PM — 4:00 PM", dinner: "4:00 PM — 9:30 PM" },
 ];
 
 const POSITION = [37.7249, -122.1561]; // 1427 E 14th St, San Leandro, CA
@@ -36,8 +36,9 @@ export default function MapHours() {
     const today = now.toLocaleDateString("en-US", { weekday: "long" });
     const currentHour = now.getHours() + now.getMinutes() / 60;
     const isSunday = today === "Sunday";
-    const isLunch = !isSunday && currentHour >= 11 && currentHour < 16;
-    const isDinner = isSunday ? currentHour >= 12 && currentHour < 21.5 : currentHour >= 16 && currentHour < 21.5;
+    const lunchStart = isSunday ? 12 : 11;
+    const isLunch = currentHour >= lunchStart && currentHour < 16;
+    const isDinner = currentHour >= 16 && currentHour < 21.5;
 
     return (
         <section id="hours" ref={ref} className="min-h-screen flex flex-col justify-center py-16 md:py-24 px-6 md:px-12 max-w-screen-2xl mx-auto">
