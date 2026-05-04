@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
-import { fetchSheet } from "@/lib/google-sheets";
+import { fetchSheet, toDirectImageUrl } from "@/lib/google-sheets";
 
 const DEFAULT_IMAGE = "https://media.base44.com/images/public/69c4afc75d0284fc64e49e47/4b7e0c0be_generated_image.png";
 
@@ -32,7 +32,7 @@ export default function MenuCarousel() {
                     category: r.category || "Rolls",
                     name: r.name || r.item_name || "",
                     desc: r.description || "",
-                    image: r.image || r.image_url || DEFAULT_IMAGE,
+                    image: toDirectImageUrl(r.image || r.image_url) || DEFAULT_IMAGE,
                 })).filter((item) => item.name);
                 if (parsed.length > 0) setItems(parsed);
             })
