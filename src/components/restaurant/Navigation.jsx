@@ -44,7 +44,11 @@ export default function Navigation({ forceScrolled = false }) {
             return;
         }
         if (href.startsWith("/")) {
-            navigate(href);
+            if (location.pathname === href) {
+                window.scrollTo({ top: 0, behavior: "smooth" });
+            } else {
+                navigate(href);
+            }
             return;
         }
         if (location.pathname !== "/") {
