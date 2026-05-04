@@ -3,7 +3,6 @@ import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { fetchSheet } from "@/lib/google-sheets";
 
-const OMAKASE_IMG = "https://media.base44.com/images/public/69c4afc75d0284fc64e49e47/94034c906_generated_b72e7551.png";
 
 const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSzAu9nbAJtnbgol4C2LNlNh3HyxJs84W8mfVEtz_r44KzApHlOSFQdzdD_a_5nH7APxsWgu66RWtER/pub?gid=1668082783&single=true&output=csv";
 
@@ -60,24 +59,10 @@ export default function Experience() {
                         </h2>
                         <p className="font-body text-sm text-muted-foreground mt-6 leading-[1.8]">
                             Discover our curated selection of premium nigiri and seasonal specialties.
-                            Hand-selected daily from the morning's finest catch.
                         </p>
                     </motion.div>
 
-                    <motion.div
-                        initial={{ opacity: 0, x: 40 }}
-                        animate={isInView ? { opacity: 1, x: 0 } : {}}
-                        transition={{ duration: 1 }}
-                        className="col-span-12 md:col-span-5 md:col-start-7"
-                    >
-                        <div className="relative overflow-hidden aspect-[16/10]">
-                            <img
-                                src={OMAKASE_IMG}
-                                alt="Omakase sushi course arranged on rectangular plate"
-                                className="w-full h-full object-cover"
-                            />
-                        </div>
-                    </motion.div>
+
                 </div>
 
                 {/* Two-column specials grid */}
