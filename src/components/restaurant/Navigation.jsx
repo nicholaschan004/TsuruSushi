@@ -77,6 +77,7 @@ export default function Navigation({ forceScrolled = false }) {
                                 <div className="flex flex-col">
                                     <span className="font-display text-base sm:text-xl tracking-[0.3em] font-light leading-tight">TSURU SUSHI</span>
                                     <span className="font-body text-[7px] sm:text-[8px] tracking-[0.3em] uppercase opacity-60 leading-tight">Japanese Restaurant</span>
+                                    <span className="font-body text-[7px] sm:text-[8px] tracking-[0.3em] uppercase opacity-60 leading-tight">Sushi Bar & Grill</span>
                                 </div>
                             </a>
 
