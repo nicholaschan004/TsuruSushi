@@ -63,7 +63,7 @@ export default function OrderReserve() {
                             (510) 352-3748
                         </a>
                         <p className="font-body text-xs text-muted-foreground mt-6 tracking-[0.15em] uppercase">
-                            Or order through online platforms below
+                            Order through online platforms below for delivery
                         </p>
                     </div>
                 </motion.div>
