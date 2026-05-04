@@ -52,14 +52,19 @@ export default function OrderReserve() {
                 >
                     <div className="col-span-12 md:col-span-6 md:col-start-2">
                         <p className="font-body text-[10px] tracking-[0.4em] uppercase text-muted-foreground mb-4">
-                            Delivery & Pickup
+                            Pickup
                         </p>
                         <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-light text-foreground leading-tight">
-                            Order Online or Phone-In to pick up at our restaurant:{" "}
-                            <a href="tel:5103523748" className="hover:text-primary transition-colors duration-300">
-                                (510) 352-3748
-                            </a>
+                            Phone-In to pick up
+                            <br />
+                            at our restaurant
                         </h2>
+                        <a href="tel:5103523748" className="font-display text-3xl md:text-4xl lg:text-5xl font-light text-primary hover:text-primary/80 transition-colors duration-300 mt-2 block">
+                            (510) 352-3748
+                        </a>
+                        <p className="font-body text-xs text-muted-foreground mt-6 tracking-[0.15em] uppercase">
+                            Or order through online platforms below
+                        </p>
                     </div>
                 </motion.div>
 
