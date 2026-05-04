@@ -1,10 +1,27 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
+import { fetchSheet } from "@/lib/google-sheets";
+
+const FALLBACK_EMAIL = "Suntsuru1@gmail.com";
+const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSzAu9nbAJtnbgol4C2LNlNh3HyxJs84W8mfVEtz_r44KzApHlOSFQdzdD_a_5nH7APxsWgu66RWtER/pub?gid=187713365&single=true&output=csv";
 
 export default function Footer() {
     const ref = useRef(null);
     const isInView = useInView(ref, { once: true, margin: "-50px" });
+    const [email, setEmail] = useState(FALLBACK_EMAIL);
+
+    useEffect(() => {
+        fetchSheet(SHEET_URL)
+            .then((rows) => {
+                if (rows.length > 0) {
+                    const row = rows[0];
+                    const value = row.email || row.value || Object.values(row)[0];
+                    if (value && value.includes("@")) setEmail(value);
+                }
+            })
+            .catch(() => {});
+    }, []);
 
     return (
         <footer id="contact" ref={ref} className="snap-start py-8 px-6 md:px-12 bg-background relative">
@@ -44,7 +61,7 @@ export default function Footer() {
 
                 <div className="mt-6 pt-6 border-t border-border text-center space-y-3">
                     <p className="font-body text-xs text-muted-foreground">
-                        For catering orders & further inquiries email: <a href="mailto:Suntsuru1@gmail.com" className="text-foreground hover:text-primary transition-colors duration-300">Suntsuru1@gmail.com</a>
+                        For catering orders & further inquiries email: <a href={`mailto:${email}`} className="text-foreground hover:text-primary transition-colors duration-300">{email}</a>
                     </p>
                     <p className="font-body text-[10px] text-muted-foreground tracking-wider">
                         © 2026 Tsuru Sushi. All rights reserved.
