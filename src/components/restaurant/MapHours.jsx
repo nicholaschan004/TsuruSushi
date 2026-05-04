@@ -104,6 +104,8 @@ export default function MapHours() {
                         Reservations strongly recommended.
                         <br />
                         Walk-ins subject to availability.
+                        <br />
+                        Phone-in to order ahead.
                     </motion.p>
                 </motion.div>
 
