@@ -2,20 +2,18 @@ import React, { useRef, useState, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
-import { fetchSheet, toDirectImageUrl } from "@/lib/google-sheets";
-
-const DEFAULT_IMAGE = "https://media.base44.com/images/public/69c4afc75d0284fc64e49e47/4b7e0c0be_generated_image.png";
+import { fetchSheet, toDirectImageUrl, preloadImages } from "@/lib/google-sheets";
 
 const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSzAu9nbAJtnbgol4C2LNlNh3HyxJs84W8mfVEtz_r44KzApHlOSFQdzdD_a_5nH7APxsWgu66RWtER/pub?gid=1217918855&single=true&output=csv";
 
 const FALLBACK = [
-    { category: "Rolls", name: "E14 Roll", desc: "Shrimp tempura, tobiko, black tobiko, avocado & creamy spicy sauce", image: DEFAULT_IMAGE },
-    { category: "Rolls", name: "Dragon Roll", desc: "Shrimp tempura, and assorted vegetables topped with unagi, avocado, tobiko, wasabi tobiko, and sweet house sauce", image: DEFAULT_IMAGE },
-    { category: "Rolls", name: "Lion King Roll", desc: "Baked salmon over california roll topped tobiko and specialty sauce", image: DEFAULT_IMAGE },
-    { category: "Rolls", name: "Tiger Roll", desc: "(8pcs) Deep fried assorted fish with specialty sauce", image: DEFAULT_IMAGE },
-    { category: "Rolls", name: "Badass Roll", desc: "Shrimp tempura, spicy tuna, topped with tuna, salmon, avocado, tempura crumbs, and sweet house sauce", image: DEFAULT_IMAGE },
-    { category: "Rolls", name: "Rainbow Roll", desc: "(8pcs) Assorted raw fish on top of California roll", image: DEFAULT_IMAGE },
-    { category: "Rolls", name: "Crunchy Roll", desc: "Deep fried shrimp tempura, kani, coated in crispy tempura crumbs, drizzled with sweet house sauce", image: DEFAULT_IMAGE },
+    { category: "Rolls", name: "E14 Roll", desc: "Shrimp tempura, tobiko, black tobiko, avocado & creamy spicy sauce", image: null },
+    { category: "Rolls", name: "Dragon Roll", desc: "Shrimp tempura, and assorted vegetables topped with unagi, avocado, tobiko, wasabi tobiko, and sweet house sauce", image: null },
+    { category: "Rolls", name: "Lion King Roll", desc: "Baked salmon over california roll topped tobiko and specialty sauce", image: null },
+    { category: "Rolls", name: "Tiger Roll", desc: "(8pcs) Deep fried assorted fish with specialty sauce", image: null },
+    { category: "Rolls", name: "Badass Roll", desc: "Shrimp tempura, spicy tuna, topped with tuna, salmon, avocado, tempura crumbs, and sweet house sauce", image: null },
+    { category: "Rolls", name: "Rainbow Roll", desc: "(8pcs) Assorted raw fish on top of California roll", image: null },
+    { category: "Rolls", name: "Crunchy Roll", desc: "Deep fried shrimp tempura, kani, coated in crispy tempura crumbs, drizzled with sweet house sauce", image: null },
 ];
 
 export default function MenuCarousel() {
@@ -32,9 +30,12 @@ export default function MenuCarousel() {
                     category: r.category || "Rolls",
                     name: r.name || r.item_name || "",
                     desc: r.description || "",
-                    image: toDirectImageUrl(r.image || r.image_url) || DEFAULT_IMAGE,
+                    image: toDirectImageUrl(r.image || r.image_url) || null,
                 })).filter((item) => item.name);
-                if (parsed.length > 0) setItems(parsed);
+                if (parsed.length > 0) {
+                    preloadImages(parsed.map((item) => item.image).filter(Boolean));
+                    setItems(parsed);
+                }
             })
             .catch(() => {});
     }, []);
@@ -119,11 +120,15 @@ export default function MenuCarousel() {
                         className="flex-shrink-0 w-[60vw] sm:w-[45vw] md:w-[28vw] lg:w-[22vw] group cursor-pointer"
                     >
                         <div className="relative overflow-hidden bg-secondary aspect-[3/4]">
-                            <img
-                                src={item.image}
-                                alt={item.name}
-                                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                            />
+                            {item.image ? (
+                                <img
+                                    src={item.image}
+                                    alt={item.name}
+                                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                                />
+                            ) : (
+                                <div className="w-full h-full bg-secondary" />
+                            )}
                             {/* Overlay info on hover */}
                             <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/20 transition-all duration-500" />
                             <div className="absolute top-6 left-6">

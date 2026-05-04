@@ -1,5 +1,5 @@
 const CACHE_DURATION = 5 * 60 * 1000; // 5 minutes
-const cache = {};
+const memCache = {};
 
 function parseCSVLine(line) {
     const values = [];
@@ -70,17 +70,86 @@ export function toDirectImageUrl(url) {
     return trimmed;
 }
 
+/**
+ * Preload an image so the browser caches it for instant display.
+ */
+export function preloadImage(url) {
+    if (!url) return;
+    const img = new Image();
+    img.src = url;
+}
+
+/**
+ * Preload an array of image URLs in parallel.
+ */
+export function preloadImages(urls) {
+    urls.forEach((url) => preloadImage(url));
+}
+
+/**
+ * Generate a short localStorage key from a sheet URL.
+ */
+function storageKey(sheetUrl) {
+    // Use gid or last segment as key
+    const match = sheetUrl.match(/gid=(\d+)/);
+    return `tsuru_sheet_${match ? match[1] : "default"}`;
+}
+
+/**
+ * Fetch a published Google Sheet as CSV, parse it, and return rows.
+ * Uses a two-tier cache:
+ *   1. In-memory (instant, lost on page reload)
+ *   2. localStorage (survives reloads, 5-minute TTL)
+ * The sheet is always re-fetched in the background to stay fresh.
+ */
 export async function fetchSheet(sheetUrl) {
     const now = Date.now();
-    if (cache[sheetUrl] && now - cache[sheetUrl].time < CACHE_DURATION) {
-        return cache[sheetUrl].data;
+
+    // Tier 1: in-memory cache (instant)
+    if (memCache[sheetUrl] && now - memCache[sheetUrl].time < CACHE_DURATION) {
+        return memCache[sheetUrl].data;
     }
 
+    // Tier 2: localStorage cache (survives reload)
+    const key = storageKey(sheetUrl);
+    try {
+        const stored = localStorage.getItem(key);
+        if (stored) {
+            const parsed = JSON.parse(stored);
+            if (now - parsed.time < CACHE_DURATION) {
+                // Populate memory cache from localStorage
+                memCache[sheetUrl] = { data: parsed.data, time: parsed.time };
+                // Refresh in background silently
+                refreshSheet(sheetUrl, key).catch(() => {});
+                return parsed.data;
+            }
+        }
+    } catch (_e) {
+        // localStorage unavailable or corrupt — continue to fetch
+    }
+
+    // No cache — fetch fresh
+    return refreshSheet(sheetUrl, key);
+}
+
+/**
+ * Fetch fresh data from the sheet and update both caches.
+ */
+async function refreshSheet(sheetUrl, key) {
+    const now = Date.now();
     const res = await fetch(sheetUrl);
     if (!res.ok) throw new Error("Failed to fetch sheet");
     const text = await res.text();
     if (text.includes("<!DOCTYPE html>")) throw new Error("Sheet not published");
     const data = parseCSV(text);
-    cache[sheetUrl] = { data, time: now };
+
+    // Update both caches
+    memCache[sheetUrl] = { data, time: now };
+    try {
+        localStorage.setItem(key, JSON.stringify({ data, time: now }));
+    } catch (_e) {
+        // localStorage full or unavailable — ignore
+    }
+
     return data;
 }
