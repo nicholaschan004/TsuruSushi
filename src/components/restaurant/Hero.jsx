@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
+import { fetchSheet, toDirectImageUrl } from "@/lib/google-sheets";
 
-const HERO_IMG = "https://media.base44.com/images/public/69c4afc75d0284fc64e49e47/6f957d3e2_generated_38c80c72.png";
+const FALLBACK_IMG = "https://media.base44.com/images/public/69c4afc75d0284fc64e49e47/6f957d3e2_generated_38c80c72.png";
+const FALLBACK_SUBTITLE = "— San Leandro Chamber of Commerce Award Honoree —";
+
+const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSzAu9nbAJtnbgol4C2LNlNh3HyxJs84W8mfVEtz_r44KzApHlOSFQdzdD_a_5nH7APxsWgu66RWtER/pub?gid=294905546&single=true&output=csv";
 
 export default function Hero() {
     const { scrollY } = useScroll();
@@ -9,6 +13,23 @@ export default function Hero() {
     const textOpacity = useTransform(scrollY, [0, 400], [1, 0]);
     const splitLeft = useTransform(scrollY, [0, 600], [0, -120]);
     const splitRight = useTransform(scrollY, [0, 600], [0, 120]);
+
+    const [heroImg, setHeroImg] = useState(FALLBACK_IMG);
+    const [subtitle, setSubtitle] = useState(FALLBACK_SUBTITLE);
+
+    useEffect(() => {
+        fetchSheet(SHEET_URL)
+            .then((rows) => {
+                if (rows.length > 0) {
+                    const row = rows[0];
+                    const img = toDirectImageUrl(row.image || row.image_url);
+                    if (img) setHeroImg(img);
+                    const sub = row.subtitle || row.tagline;
+                    if (sub) setSubtitle(sub);
+                }
+            })
+            .catch(() => {});
+    }, []);
 
     return (
         <section className="relative h-screen overflow-hidden">
@@ -21,7 +42,7 @@ export default function Hero() {
                 className="absolute inset-0 -top-20"
             >
                 <img
-                    src={HERO_IMG}
+                    src={heroImg}
                     alt="Premium Otoro nigiri sushi on dark ceramic plate"
                     className="w-full h-[120%] object-cover"
                 />
@@ -61,7 +82,7 @@ export default function Hero() {
                     className="mt-6 flex flex-col items-center gap-3"
                 >
                     <p className="font-body text-[10px] tracking-[0.25em] uppercase text-background/50 text-center px-4">
-                        — San Leandro Chamber of Commerce Award Honoree —
+                        {subtitle}
                     </p>
                 </motion.div>
 

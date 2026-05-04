@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
+import { fetchSheet } from "@/lib/google-sheets";
 
 const PILLARS = [
     { number: "01", title: "Quality" },
@@ -8,9 +9,30 @@ const PILLARS = [
     { number: "03", title: "Experience" },
 ];
 
+const FALLBACK_PARAGRAPHS = [
+    "Tsuru Sushi was established since 1997 serving sushi in the heart of downtown San Leandro. Our family and long time staff are excited to introduce and in some cases; re-introduce some of our guests' favorites.",
+    "Norman's own creation of East 14th Roll which combines prawn tempura, tobiko, avocado and his spicy sauce. Other hidden gems include Baby Lobster Tails, Lion King Roll, Spider Roll, which is our soft shell crab enveloped in our special batter, and Spicy Tuna Roll to name just a few.",
+    "Look over our menu and you will find a large and appetizing selection of Vegetarian Sushi, as well as Bento Boxes and Lunch and Dinner Plates. We welcome parties large and small, catering as well as \"To Go\" orders.",
+];
+
+const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSzAu9nbAJtnbgol4C2LNlNh3HyxJs84W8mfVEtz_r44KzApHlOSFQdzdD_a_5nH7APxsWgu66RWtER/pub?gid=699016301&single=true&output=csv";
+
 export default function Provenance() {
     const ref = useRef(null);
     const isInView = useInView(ref, { once: true, margin: "-100px" });
+    const [paragraphs, setParagraphs] = useState(FALLBACK_PARAGRAPHS);
+
+    useEffect(() => {
+        fetchSheet(SHEET_URL)
+            .then((rows) => {
+                const sorted = rows
+                    .filter((r) => r.paragraph)
+                    .sort((a, b) => (parseInt(a.sort_order) || 0) - (parseInt(b.sort_order) || 0))
+                    .map((r) => r.paragraph);
+                if (sorted.length > 0) setParagraphs(sorted);
+            })
+            .catch(() => {});
+    }, []);
 
     return (
         <section id="about" ref={ref} className="snap-start min-h-screen flex flex-col justify-center py-16 md:py-24 bg-foreground text-background">
@@ -33,15 +55,11 @@ export default function Provenance() {
                             Story
                         </h2>
                         <div className="my-8 h-px w-full bg-background/10" />
-                        <p className="font-body text-sm text-background/60 leading-[1.8] max-w-sm">
-                            Tsuru Sushi was established since 1997 serving sushi in the heart of downtown San Leandro. Our family and long time staff are excited to introduce and in some cases; re-introduce some of our guests' favorites.
-                        </p>
-                        <p className="font-body text-sm text-background/60 mt-4 leading-[1.8] max-w-sm">
-                            Norman's own creation of East 14th Roll which combines prawn tempura, tobiko, avocado and his spicy sauce. Other hidden gems include Baby Lobster Tails, Lion King Roll, Spider Roll, which is our soft shell crab enveloped in our special batter, and Spicy Tuna Roll to name just a few.
-                        </p>
-                        <p className="font-body text-sm text-background/60 mt-4 leading-[1.8] max-w-sm">
-                            Look over our menu and you will find a large and appetizing selection of Vegetarian Sushi, as well as Bento Boxes and Lunch and Dinner Plates. We welcome parties large and small, catering as well as "To Go" orders.
-                        </p>
+                        {paragraphs.map((text, i) => (
+                            <p key={i} className={`font-body text-sm text-background/60 leading-[1.8] max-w-sm ${i > 0 ? "mt-4" : ""}`}>
+                                {text}
+                            </p>
+                        ))}
 
                         {/* Year highlight */}
                         <motion.div
