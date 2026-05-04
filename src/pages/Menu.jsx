@@ -159,7 +159,7 @@ export default function Menu() {
                                         : "text-muted-foreground hover:text-foreground"
                                 }`}
                             >
-                                {cat}
+                                {cat.replace(/\*\*(.+?)\*\*/g, "$1").replace(/__(.+?)__/g, "$1")}
                             </button>
                         ))}
                     </div>
