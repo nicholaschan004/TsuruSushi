@@ -266,7 +266,7 @@ function MenuItem({ item, index, inView, isOption }) {
         >
             <div className="flex items-baseline justify-between gap-4">
                 <h3 className="font-display text-lg font-light text-foreground">
-                    {item.name}
+                    <InlineMarkdown text={item.name} />
                 </h3>
                 {item.price && (
                     <span className="font-display text-base font-light text-foreground flex-shrink-0">
