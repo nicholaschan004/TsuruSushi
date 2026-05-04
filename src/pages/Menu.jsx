@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import Navigation from "@/components/restaurant/Navigation";
+import { InlineMarkdown } from "@/lib/InlineMarkdown";
 import Footer from "@/components/restaurant/Footer";
 
 const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSzAu9nbAJtnbgol4C2LNlNh3HyxJs84W8mfVEtz_r44KzApHlOSFQdzdD_a_5nH7APxsWgu66RWtER/pub?gid=1692601176&single=true&output=csv";
@@ -275,7 +276,7 @@ function MenuItem({ item, index, inView, isOption }) {
             </div>
             {item.description && (
                 <p className="font-body text-xs text-muted-foreground mt-1 leading-relaxed">
-                    {item.description}
+                    <InlineMarkdown text={item.description} />
                 </p>
             )}
         </motion.div>
