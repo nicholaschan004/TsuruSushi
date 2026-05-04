@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { fetchSheet, toDirectImageUrl } from "@/lib/google-sheets";
+import { fetchSheet, toDirectImageUrl, preloadImage } from "@/lib/google-sheets";
 
-const FALLBACK_IMG = "https://media.base44.com/images/public/69c4afc75d0284fc64e49e47/6f957d3e2_generated_38c80c72.png";
 const FALLBACK_SUBTITLE = "— San Leandro Chamber of Commerce Award Honoree —";
 
 const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSzAu9nbAJtnbgol4C2LNlNh3HyxJs84W8mfVEtz_r44KzApHlOSFQdzdD_a_5nH7APxsWgu66RWtER/pub?gid=294905546&single=true&output=csv";
@@ -14,7 +13,7 @@ export default function Hero() {
     const splitLeft = useTransform(scrollY, [0, 600], [0, -120]);
     const splitRight = useTransform(scrollY, [0, 600], [0, 120]);
 
-    const [heroImg, setHeroImg] = useState(FALLBACK_IMG);
+    const [heroImg, setHeroImg] = useState(null);
     const [subtitle, setSubtitle] = useState(FALLBACK_SUBTITLE);
 
     useEffect(() => {
@@ -23,7 +22,10 @@ export default function Hero() {
                 if (rows.length > 0) {
                     const row = rows[0];
                     const img = toDirectImageUrl(row.image || row.image_url);
-                    if (img) setHeroImg(img);
+                    if (img) {
+                        preloadImage(img);
+                        setHeroImg(img);
+                    }
                     const sub = row.subtitle || row.tagline;
                     if (sub) setSubtitle(sub);
                 }
@@ -41,11 +43,13 @@ export default function Hero() {
                 transition={{ duration: 6, ease: "easeOut" }}
                 className="absolute inset-0 -top-20"
             >
-                <img
-                    src={heroImg}
-                    alt="Premium Otoro nigiri sushi on dark ceramic plate"
-                    className="w-full h-[120%] object-cover"
-                />
+                {heroImg && (
+                    <img
+                        src={heroImg}
+                        alt="Premium Otoro nigiri sushi on dark ceramic plate"
+                        className="w-full h-[120%] object-cover"
+                    />
+                )}
                 <div className="absolute inset-0 bg-foreground/30" />
             </motion.div>
 
