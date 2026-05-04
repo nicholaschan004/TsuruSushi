@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
 import { fetchSheet } from "@/lib/google-sheets";
+import { InlineMarkdown } from "@/lib/InlineMarkdown";
 
 const PILLARS = [
     { number: "01", title: "Quality" },
@@ -57,7 +58,7 @@ export default function Provenance() {
                         <div className="my-8 h-px w-full bg-background/10" />
                         {paragraphs.map((text, i) => (
                             <p key={i} className={`font-body text-sm text-background/60 leading-[1.8] max-w-sm ${i > 0 ? "mt-4" : ""}`}>
-                                {text}
+                                <InlineMarkdown text={text} />
                             </p>
                         ))}
 

@@ -3,7 +3,7 @@ import { motion, useInView } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { fetchSheet, toDirectImageUrl, preloadImages } from "@/lib/google-sheets";
-import { InlineMarkdown } from "@/lib/utils";
+import { InlineMarkdown } from "@/lib/InlineMarkdown";
 
 const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSzAu9nbAJtnbgol4C2LNlNh3HyxJs84W8mfVEtz_r44KzApHlOSFQdzdD_a_5nH7APxsWgu66RWtER/pub?gid=1217918855&single=true&output=csv";
 
