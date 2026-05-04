@@ -8,7 +8,7 @@ export function InlineMarkdown({ text }) {
         <>
             {parts.map((part, i) =>
                 i % 2 === 1
-                    ? <strong key={i} style={{ fontWeight: 700 }}>{part}</strong>
+                    ? <strong key={i} style={{ fontWeight: 900, fontSize: "1.15em" }}>{part}</strong>
                     : part
             )}
         </>
