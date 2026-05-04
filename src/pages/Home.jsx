@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react"
+import { useEffect, useLayoutEffect, useRef } from "react"
 import { useLocation } from "react-router-dom"
 import Navigation from "@/components/restaurant/Navigation"
 import Hero from "@/components/restaurant/Hero"
@@ -13,8 +13,8 @@ export default function Home() {
     const location = useLocation()
     const isFirstRender = useRef(true)
 
-    useEffect(() => {
-        window.scrollTo(0, 0)
+    useLayoutEffect(() => {
+        window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
     }, [])
 
     useEffect(() => {
