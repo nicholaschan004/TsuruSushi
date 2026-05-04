@@ -55,12 +55,12 @@ export default function OrderReserve() {
                             Delivery & Pickup
                         </p>
                         <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-light text-foreground leading-tight">
-                            Order
+                            Order Online
                             <br />
-                            Online
+                            or Phone-In
                         </h2>
-                        <p className="font-body text-sm text-muted-foreground mt-6 leading-[1.8]">
-                            Order online or phone-in to pick up at our restaurant:{" "}
+                        <p className="font-body text-sm text-muted-foreground mt-4 leading-[1.8]">
+                            Pick up at our restaurant:{" "}
                             <a href="tel:5103523748" className="text-foreground hover:text-primary transition-colors duration-300">
                                 (510) 352-3748
                             </a>
