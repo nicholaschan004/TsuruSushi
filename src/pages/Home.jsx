@@ -14,6 +14,10 @@ export default function Home() {
     const isFirstRender = useRef(true)
 
     useEffect(() => {
+        window.scrollTo(0, 0)
+    }, [])
+
+    useEffect(() => {
         const target = location.state?.scrollTo || location.hash
         if (!target) return
         if (isFirstRender.current && !location.state?.scrollTo) {
