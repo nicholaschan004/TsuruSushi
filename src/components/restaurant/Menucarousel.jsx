@@ -140,7 +140,7 @@ export default function MenuCarousel() {
                         </div>
                         <div className="mt-6">
                             <h3 className="font-display text-2xl md:text-3xl font-light text-foreground">
-                                {item.name}
+                                <InlineMarkdown text={item.name} />
                             </h3>
                             {item.desc && (
                                 <p className="font-body text-xs text-muted-foreground mt-2 leading-relaxed">

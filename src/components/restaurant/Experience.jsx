@@ -76,7 +76,7 @@ export default function Experience() {
                     {specials.map((item) => (
                         <div key={item.name} className="flex flex-col py-3 border-b border-border">
                             <div className="flex items-baseline justify-between w-full">
-                                <span className="font-display text-lg font-light">{item.name}</span>
+                                <span className="font-display text-lg font-light"><InlineMarkdown text={item.name} /></span>
                                 {item.price && (
                                     <span className="font-body text-sm text-muted-foreground ml-4 whitespace-nowrap">{item.price}</span>
                                 )}
