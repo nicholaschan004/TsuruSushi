@@ -34,10 +34,13 @@ export default function Provenance() {
                         </h2>
                         <div className="my-8 h-px w-full bg-background/10" />
                         <p className="font-body text-sm text-background/60 leading-[1.8] max-w-sm">
-                            Tsuru Sushi has been established since 1997, with an unwavering focus on quality, tradition, and the art of sushi.
+                            Tsuru Sushi was established since 1997 serving sushi in the heart of downtown San Leandro. Our family and long time staff are excited to introduce and in some cases; re-introduce some of our guests' favorites.
                         </p>
                         <p className="font-body text-sm text-background/60 mt-4 leading-[1.8] max-w-sm">
-                            What began as a small neighborhood counter has grown into a destination for those who appreciate the craft of true Edomae sushi.
+                            Norman's own creation of East 14th Roll which combines prawn tempura, tobiko, avocado and his spicy sauce. Other hidden gems include Baby Lobster Tails, Lion King Roll, Spider Roll, which is our soft shell crab enveloped in our special batter, and Spicy Tuna Roll to name just a few.
+                        </p>
+                        <p className="font-body text-sm text-background/60 mt-4 leading-[1.8] max-w-sm">
+                            Look over our menu and you will find a large and appetizing selection of Vegetarian Sushi, as well as Bento Boxes and Lunch and Dinner Plates. We welcome parties large and small, catering as well as "To Go" orders.
                         </p>
 
                         {/* Year highlight */}
