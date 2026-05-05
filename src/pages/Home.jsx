@@ -26,6 +26,7 @@ export default function Home() {
         }
         isFirstRender.current = false
         setTimeout(() => {
+            if (!/^#[A-Za-z][\w-]*$/.test(target)) return
             const el = document.querySelector(target)
             if (el) el.scrollIntoView({ behavior: "smooth" })
         }, 100)

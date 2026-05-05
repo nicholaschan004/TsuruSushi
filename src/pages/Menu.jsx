@@ -103,7 +103,9 @@ function parseMenuData(csvText) {
 export default function Menu() {
     const [activeCategory, setActiveCategory] = useState("All");
     const cached = sessionStorage.getItem("tsuru_menu");
-    const [menuData, setMenuData] = useState(() => cached ? JSON.parse(cached) : null);
+    const [menuData, setMenuData] = useState(() => {
+        try { return cached ? JSON.parse(cached) : null; } catch { return null; }
+    });
     const [loading, setLoading] = useState(!cached);
     const heroRef = useRef(null);
     const heroInView = useInView(heroRef, { once: true, margin: "-100px" });
