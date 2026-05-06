@@ -81,12 +81,12 @@ export default function Navigation({ forceScrolled = false }) {
                                 </div>
                             </a>
 
-                            <nav className="hidden md:flex items-center gap-10">
+                            <nav className="hidden lg:flex items-center gap-6 xl:gap-10">
                                 {NAV_LINKS.filter(l => !l.mobileOnly).map((link) => (
                                     <button
                                         key={link.label}
                                         onClick={() => scrollTo(link.href)}
-                                        className={`font-body text-xs tracking-[0.2em] uppercase transition-colors duration-300 ${scrolled ? "text-foreground/70 hover:text-foreground" : "text-white/80 hover:text-white"}`}
+                                        className={`font-body text-[11px] xl:text-xs tracking-[0.2em] uppercase whitespace-nowrap transition-colors duration-300 ${scrolled ? "text-foreground/70 hover:text-foreground" : "text-white/80 hover:text-white"}`}
                                     >
                                         {link.label}
                                     </button>
@@ -95,7 +95,7 @@ export default function Navigation({ forceScrolled = false }) {
 
                             <button
                                 onClick={() => setMobileOpen(true)}
-                                className={`md:hidden transition-colors duration-500 ${scrolled ? "text-foreground" : "text-white"}`}
+                                className={`lg:hidden transition-colors duration-500 ${scrolled ? "text-foreground" : "text-white"}`}
                             >
                                 <Menu className="w-5 h-5" />
                             </button>
