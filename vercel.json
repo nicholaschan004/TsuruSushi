@@ -1,6 +1,6 @@
 {
     "redirects": [
-        { "source": "/menu.html", "destination": "/#menu", "permanent": true }
+        { "source": "/menu.html", "destination": "/menu", "permanent": true }
     ],
     "rewrites": [
         { "source": "/(.*)", "destination": "/index.html" }
