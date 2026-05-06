@@ -1,7 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
 import { Link } from "react-router-dom";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ArrowLeft } from "lucide-react";
 import { fetchSheet, toDirectImageUrl, preloadImages } from "@/lib/google-sheets";
 import { InlineMarkdown } from "@/lib/InlineMarkdown";
 
@@ -75,6 +75,15 @@ export default function MenuCarousel() {
         };
     }, []);
 
+    const scroll = (direction) => {
+        if (scrollRef.current) {
+            const amount = scrollRef.current.offsetWidth * 0.7;
+            scrollRef.current.scrollBy({
+                left: direction === "right" ? amount : -amount,
+                behavior: "smooth",
+            });
+        }
+    };
 
     return (
         <section id="menu" ref={sectionRef} className="pt-12 md:pt-16 pb-24 md:pb-36">
@@ -103,6 +112,20 @@ export default function MenuCarousel() {
                                 </Link>
                             </div>
                         </motion.div>
+                    </div>
+                    <div className="col-span-12 md:col-span-3 md:col-start-10 flex items-end justify-start md:justify-end gap-4 mt-6 md:mt-0">
+                        <button
+                            onClick={() => scroll("left")}
+                            className="w-12 h-12 border border-border flex items-center justify-center hover:bg-foreground hover:text-background transition-all duration-300"
+                        >
+                            <ArrowLeft className="w-4 h-4" />
+                        </button>
+                        <button
+                            onClick={() => scroll("right")}
+                            className="w-12 h-12 border border-border flex items-center justify-center hover:bg-foreground hover:text-background transition-all duration-300"
+                        >
+                            <ArrowRight className="w-4 h-4" />
+                        </button>
                     </div>
                 </div>
             </div>
