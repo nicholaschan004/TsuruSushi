@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { fetchSheet, toDirectImageUrl, preloadImage } from "@/lib/google-sheets";
+import { fetchSheet, toDirectImageUrl } from "@/lib/google-sheets";
+import { resolveImage } from "@/lib/image-resolver";
 import { InlineMarkdown } from "@/lib/InlineMarkdown";
 
 const FALLBACK_SUBTITLES = ["— San Leandro Chamber of Commerce Award Honoree —"];
@@ -14,18 +15,16 @@ export default function Hero() {
     const splitLeft = useTransform(scrollY, [0, 600], [0, -120]);
     const splitRight = useTransform(scrollY, [0, 600], [0, 120]);
 
-    const [heroImg, setHeroImg] = useState(null);
+    const [heroImg, setHeroImg] = useState("/hero-default.jpg");
     const [subtitles, setSubtitles] = useState(FALLBACK_SUBTITLES);
 
     useEffect(() => {
         fetchSheet(SHEET_URL)
             .then((rows) => {
                 if (rows.length > 0) {
-                    const img = toDirectImageUrl(rows[0].image || rows[0].image_url);
-                    if (img) {
-                        preloadImage(img);
-                        setHeroImg(img);
-                    }
+                    const rawUrl = rows[0].image || rows[0].image_url;
+                    const img = resolveImage(toDirectImageUrl(rawUrl));
+                    if (img) setHeroImg(img);
                     const subs = rows
                         .map((r) => r.subtitle || r.tagline)
                         .filter(Boolean);
@@ -45,13 +44,11 @@ export default function Hero() {
                 transition={{ duration: 6, ease: "easeOut" }}
                 className="absolute inset-0 -top-20"
             >
-                {heroImg && (
-                    <img
-                        src={heroImg}
-                        alt="Premium Otoro nigiri sushi on dark ceramic plate"
-                        className="w-full h-[120%] object-cover"
-                    />
-                )}
+                <img
+                    src={heroImg}
+                    alt="Premium Otoro nigiri sushi on dark ceramic plate"
+                    className="w-full h-[120%] object-cover"
+                />
                 <div className="absolute inset-0 bg-foreground/30" />
             </motion.div>
 
