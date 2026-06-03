@@ -24,6 +24,9 @@ const SHEETS = [
     name: "hero",
     url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vSzAu9nbAJtnbgol4C2LNlNh3HyxJs84W8mfVEtz_r44KzApHlOSFQdzdD_a_5nH7APxsWgu66RWtER/pub?gid=294905546&single=true&output=csv",
     imageColumns: ["image", "image_url"],
+    // The first image of this sheet is also copied to public/hero-default.jpg
+    // so the hero's initial paint is the real photo (not a broken placeholder).
+    heroDefault: true,
   },
   {
     name: "menu_carousel",
@@ -35,6 +38,7 @@ const SHEETS = [
 const ROOT = path.resolve(import.meta.dirname, "..");
 const IMAGE_DIR = path.join(ROOT, "public", "sheets-images");
 const MANIFEST_PATH = path.join(ROOT, "src", "data", "sheet-images.json");
+const HERO_DEFAULT_PATH = path.join(ROOT, "public", "hero-default.jpg");
 
 // ─── CSV Parser ──────────────────────────────────────────────────────────────
 
@@ -157,6 +161,7 @@ async function main() {
   let downloaded = 0;
   let skipped = 0;
   let errors = 0;
+  let heroSourceFile = null;
 
   for (const sheet of SHEETS) {
     console.log(`📋 Fetching sheet: ${sheet.name}`);
@@ -185,6 +190,7 @@ async function main() {
         if (manifest[directUrl]) {
           const localFile = path.join(ROOT, "public", manifest[directUrl]);
           if (fs.existsSync(localFile)) {
+            if (sheet.heroDefault && !heroSourceFile) heroSourceFile = localFile;
             skipped++;
             continue;
           }
@@ -197,6 +203,8 @@ async function main() {
           const { finalPath } = await downloadImage(directUrl, tempDest);
           const localPath = "/sheets-images/" + path.basename(finalPath);
           manifest[directUrl] = localPath;
+
+          if (sheet.heroDefault && !heroSourceFile) heroSourceFile = finalPath;
 
           // Also map the raw Google Drive URL if different from direct
           const rawDirect = toDirectUrl(rawUrl);
@@ -216,6 +224,13 @@ async function main() {
         }
       }
     }
+  }
+
+  // Keep public/hero-default.jpg in sync with the live hero image so the
+  // hero's first paint shows the real photo instead of a broken placeholder.
+  if (heroSourceFile && fs.existsSync(heroSourceFile)) {
+    fs.copyFileSync(heroSourceFile, HERO_DEFAULT_PATH);
+    console.log(`\n🌅 hero-default.jpg ← ${path.basename(heroSourceFile)}`);
   }
 
   // Write manifest
