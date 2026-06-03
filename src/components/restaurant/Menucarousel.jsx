@@ -2,7 +2,8 @@ import React, { useRef, useState, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
 import { Link } from "react-router-dom";
 import { ArrowRight, ArrowLeft } from "lucide-react";
-import { fetchSheet, toDirectImageUrl, preloadImages } from "@/lib/google-sheets";
+import { fetchSheet, toDirectImageUrl } from "@/lib/google-sheets";
+import { resolveImage } from "@/lib/image-resolver";
 import { InlineMarkdown } from "@/lib/InlineMarkdown";
 
 const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSzAu9nbAJtnbgol4C2LNlNh3HyxJs84W8mfVEtz_r44KzApHlOSFQdzdD_a_5nH7APxsWgu66RWtER/pub?gid=1217918855&single=true&output=csv";
@@ -31,10 +32,9 @@ export default function MenuCarousel() {
                     category: r.category || "Rolls",
                     name: r.name || r.item_name || "",
                     desc: r.description || "",
-                    image: toDirectImageUrl(r.image || r.image_url) || null,
+                    image: resolveImage(toDirectImageUrl(r.image || r.image_url)) || null,
                 })).filter((item) => item.name);
                 if (parsed.length > 0) {
-                    preloadImages(parsed.map((item) => item.image).filter(Boolean));
                     setItems(parsed);
                 }
             })

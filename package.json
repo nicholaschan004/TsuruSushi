@@ -5,7 +5,9 @@
     "type": "module",
     "scripts": {
         "dev": "vite",
+        "sync-images": "node scripts/sync-sheet-images.mjs",
         "build": "vite build",
+        "prebuild": "node scripts/sync-sheet-images.mjs",
         "lint": "eslint . --quiet",
         "lint:fix": "eslint . --fix",
         "typecheck": "tsc -p ./jsconfig.json",
