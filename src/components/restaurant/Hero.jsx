@@ -5,6 +5,7 @@ import { resolveImage } from "@/lib/image-resolver";
 import { InlineMarkdown } from "@/lib/InlineMarkdown";
 
 const FALLBACK_SUBTITLES = ["— San Leandro Chamber of Commerce Award Honoree —"];
+const HERO_ALT_FALLBACK = "Premium Otoro nigiri sushi on dark ceramic plate";
 
 const SHEET_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vSzAu9nbAJtnbgol4C2LNlNh3HyxJs84W8mfVEtz_r44KzApHlOSFQdzdD_a_5nH7APxsWgu66RWtER/pub?gid=294905546&single=true&output=csv";
 
@@ -16,6 +17,7 @@ export default function Hero() {
     const splitRight = useTransform(scrollY, [0, 600], [0, 120]);
 
     const [heroImg, setHeroImg] = useState("/hero-default.jpg");
+    const [heroAlt, setHeroAlt] = useState(HERO_ALT_FALLBACK);
     const [subtitles, setSubtitles] = useState(FALLBACK_SUBTITLES);
 
     useEffect(() => {
@@ -25,6 +27,8 @@ export default function Hero() {
                     const rawUrl = rows[0].image || rows[0].image_url;
                     const img = resolveImage(toDirectImageUrl(rawUrl));
                     if (img) setHeroImg(img);
+                    const altText = (rows[0].alt || rows[0].alt_text || "").trim();
+                    if (altText) setHeroAlt(altText);
                     const subs = rows
                         .map((r) => r.subtitle || r.tagline)
                         .filter(Boolean);
@@ -46,7 +50,7 @@ export default function Hero() {
             >
                 <img
                     src={heroImg}
-                    alt="Premium Otoro nigiri sushi on dark ceramic plate"
+                    alt={heroAlt}
                     className="w-full h-[120%] object-cover"
                 />
                 <div className="absolute inset-0 bg-foreground/30" />
