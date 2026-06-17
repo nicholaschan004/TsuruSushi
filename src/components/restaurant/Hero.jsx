@@ -57,7 +57,7 @@ export default function Hero() {
                 style={{ opacity: textOpacity }}
                 className="absolute inset-0 flex flex-col items-center justify-center z-10"
             >
-                <div className="flex flex-col items-center overflow-hidden">
+                <h1 className="flex flex-col items-center overflow-hidden">
                     <motion.span
                         initial={{ opacity: 0, y: 40 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -76,7 +76,7 @@ export default function Hero() {
                     >
                         SUSHI
                     </motion.span>
-                </div>
+                </h1>
 
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}

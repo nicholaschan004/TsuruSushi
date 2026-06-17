@@ -116,15 +116,17 @@ export default function MenuCarousel() {
                     <div className="col-span-12 md:col-span-3 md:col-start-10 flex items-end justify-start md:justify-end gap-4 mt-6 md:mt-0">
                         <button
                             onClick={() => scroll("left")}
+                            aria-label="Previous menu items"
                             className="w-12 h-12 border border-border flex items-center justify-center hover:bg-foreground hover:text-background transition-all duration-300"
                         >
-                            <ArrowLeft className="w-4 h-4" />
+                            <ArrowLeft className="w-4 h-4" aria-hidden="true" />
                         </button>
                         <button
                             onClick={() => scroll("right")}
+                            aria-label="Next menu items"
                             className="w-12 h-12 border border-border flex items-center justify-center hover:bg-foreground hover:text-background transition-all duration-300"
                         >
-                            <ArrowRight className="w-4 h-4" />
+                            <ArrowRight className="w-4 h-4" aria-hidden="true" />
                         </button>
                     </div>
                 </div>

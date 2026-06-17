@@ -95,9 +95,10 @@ export default function Navigation({ forceScrolled = false }) {
 
                             <button
                                 onClick={() => setMobileOpen(true)}
+                                aria-label="Open menu"
                                 className={`lg:hidden transition-colors duration-500 ${scrolled ? "text-foreground" : "text-white"}`}
                             >
-                                <Menu className="w-5 h-5" />
+                                <Menu className="w-5 h-5" aria-hidden="true" />
                             </button>
                         </div>
 
@@ -120,9 +121,10 @@ export default function Navigation({ forceScrolled = false }) {
                     >
                         <button
                             onClick={() => setMobileOpen(false)}
+                            aria-label="Close menu"
                             className="absolute top-6 right-6 text-foreground"
                         >
-                            <X className="w-5 h-5" />
+                            <X className="w-5 h-5" aria-hidden="true" />
                         </button>
                         <div className="flex flex-col items-center gap-6">
                             {NAV_LINKS.map((link, i) => (
