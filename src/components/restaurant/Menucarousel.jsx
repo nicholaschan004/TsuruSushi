@@ -135,6 +135,9 @@ export default function MenuCarousel() {
             {/* Horizontal scroll carousel */}
             <div
                 ref={scrollRef}
+                role="region"
+                aria-label="Featured menu items"
+                tabIndex={0}
                 className="flex gap-6 overflow-x-auto hide-scrollbar px-6 md:px-12 pb-4"
             >
                 {items.map((item, i) => (

@@ -35,12 +35,14 @@ export default function Home() {
     return (
         <div className="min-h-screen bg-background">
             <Navigation />
-            <Hero />
-            <Experience />
-            <MenuCarousel />
-            <OrderReserve />
-            <Provenance />
-            <MapHours />
+            <main>
+                <Hero />
+                <Experience />
+                <MenuCarousel />
+                <OrderReserve />
+                <Provenance />
+                <MapHours />
+            </main>
             <Footer />
         </div>
     )

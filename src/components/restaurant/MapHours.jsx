@@ -1,7 +1,7 @@
 import React from "react";
 import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import { useRef, useEffect } from "react";
+import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 
@@ -15,6 +15,19 @@ const markerIcon = new L.Icon({
     iconAnchor: [12, 41],
     popupAnchor: [1, -34],
 });
+
+// Leaflet's map container is focusable (tabindex="0") but has no role or
+// accessible name by default. Add them so it's announced as an interactive
+// region rather than an unnamed element in the tab order.
+function MapAccessibility({ label }) {
+    const map = useMap();
+    useEffect(() => {
+        const el = map.getContainer();
+        el.setAttribute("role", "application");
+        el.setAttribute("aria-label", label);
+    }, [map, label]);
+    return null;
+}
 
 const HOURS = [
     { day: "Monday", lunch: "11:00 AM — 4:00 PM", dinner: "4:00 PM — 9:30 PM" },
@@ -125,6 +138,7 @@ export default function MapHours() {
                             style={{ height: "100%", width: "100%" }}
                             className="z-0"
                         >
+                            <MapAccessibility label="Interactive map showing Tsuru Sushi at 1427 E 14th St, San Leandro, CA" />
                             <TileLayer
                                 attribution='&copy; <a href="https://carto.com/">CARTO</a>'
                                 url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
