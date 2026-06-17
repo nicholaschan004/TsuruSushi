@@ -1,7 +1,9 @@
-# Cloudflare redirects (mirrors vercel.json redirects).
-# SPA fallback is handled by `not_found_handling: single-page-application`
-# in wrangler.jsonc, so no /* -> /index.html catch-all is needed here
-# (under Workers Static Assets a catch-all rewrite can shadow real assets).
+# Cloudflare Pages redirects (mirrors vercel.json redirects).
+# Processed top-to-bottom; first match wins. Real static assets are served
+# before the catch-all, so the SPA fallback does not shadow them.
 
 # Permanent redirect for the old menu URL
 /menu.html  /menu  301
+
+# SPA fallback: serve index.html for all client-side routes
+/*  /index.html  200
