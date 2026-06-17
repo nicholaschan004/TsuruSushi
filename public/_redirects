@@ -1,0 +1,10 @@
+# Cloudflare Pages redirects (mirrors vercel.json)
+# Processed top-to-bottom; first match wins.
+
+# Permanent redirect for the old menu URL
+/menu.html  /menu  301
+
+# SPA fallback: serve index.html for all client-side routes.
+# Real static assets (in /assets, images, etc.) are served directly and
+# are not affected by this catch-all.
+/*  /index.html  200
