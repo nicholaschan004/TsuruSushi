@@ -6,7 +6,7 @@
   // IMPORTANT: "name" must match your Cloudflare Worker/project name exactly.
   // If your project is named something other than "tsuru-sushi", change this
   // one line to match it (or rename the project in the dashboard to match).
-  "name": "tsuru-sushi",
+  "name": "tsurusushi",
   "compatibility_date": "2026-06-17",
   "assets": {
     "directory": "./dist",
