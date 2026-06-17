@@ -152,7 +152,7 @@ export default function MenuCarousel() {
                             {item.image ? (
                                 <img
                                     src={item.image}
-                                    alt={(item.name || "").replace(/\*/g, "").trim() || "Tsuru Sushi menu item"}
+                                    alt={(item.alt || item.name || "").replace(/\*/g, "").trim() || "Tsuru Sushi menu item"}
                                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                                 />
                             ) : (
