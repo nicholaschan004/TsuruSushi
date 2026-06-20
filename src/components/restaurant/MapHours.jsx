@@ -135,6 +135,7 @@ export default function MapHours() {
                             center={POSITION}
                             zoom={15}
                             scrollWheelZoom={false}
+                            zoomControl={false}
                             style={{ height: "100%", width: "100%" }}
                             className="z-0"
                         >
@@ -173,7 +174,7 @@ export default function MapHours() {
                                 rel="noopener noreferrer"
                                 className="font-body text-[10px] tracking-[0.25em] uppercase text-foreground border-b border-foreground pb-0.5 hover:text-primary hover:border-primary transition-colors duration-300"
                             >
-                                Get Directions
+                                Get Directions<span className="sr-only"> (opens in new tab)</span>
                             </a>
                         </div>
                     </div>

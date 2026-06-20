@@ -72,7 +72,7 @@ export default function Navigation({ forceScrolled = false }) {
                             }`}
                     >
                         <div className="max-w-screen-2xl mx-auto flex items-center justify-between px-6 md:px-12 py-5">
-                            <a href="#" onClick={(e) => { e.preventDefault(); if (location.pathname !== "/") { navigate("/"); } else { window.scrollTo({ top: 0, behavior: "smooth" }); } }} className={`flex items-center gap-3 transition-colors duration-500 ${scrolled ? "text-foreground" : "text-white"}`}>
+                            <a href="/" aria-label="Tsuru Sushi — home" onClick={(e) => { e.preventDefault(); if (location.pathname !== "/") { navigate("/"); } else { window.scrollTo({ top: 0, behavior: "smooth" }); } }} className={`flex items-center gap-3 transition-colors duration-500 ${scrolled ? "text-foreground" : "text-white"}`}>
                                 <img src="/tsurufavicon.png" alt="Tsuru logo" className="w-8 h-8 object-contain" />
                                 <div className="flex flex-col">
                                     <span className="font-display text-base sm:text-xl tracking-[0.3em] font-light leading-tight">TSURU SUSHI</span>

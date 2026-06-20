@@ -31,13 +31,18 @@
         --card-foreground: 160 18% 8%;
         --popover: 40 33% 98%;
         --popover-foreground: 160 18% 8%;
-        --primary: 24 85% 58%;
+        /* Orange darkened from 58% -> 34% L so accent text and white-on-orange
+           buttons meet WCAG AA 4.5:1 on the light backgrounds. Don't lighten
+           without re-checking contrast. The brighter brand orange is kept only
+           on the dark Provenance section (hardcoded there). */
+        --primary: 24 85% 34%;
         --primary-foreground: 40 33% 98%;
         --secondary: 38 18% 89%;
         --secondary-foreground: 160 18% 8%;
         --muted: 38 18% 89%;
-        --muted-foreground: 160 10% 40%;
-        --accent: 24 85% 58%;
+        /* Darkened from 40% -> 36% L for WCAG AA 4.5:1 on the cream backgrounds. */
+        --muted-foreground: 160 10% 36%;
+        --accent: 24 85% 34%;
         --accent-foreground: 40 33% 98%;
         --destructive: 0 84.2% 60.2%;
         --destructive-foreground: 0 0% 98%;

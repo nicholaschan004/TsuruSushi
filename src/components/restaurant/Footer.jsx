@@ -48,10 +48,10 @@ export default function Footer() {
 
                     <div className="flex items-center gap-5 md:gap-8">
                         <a href="https://www.instagram.com/tsuru.sushi/" target="_blank" rel="noopener noreferrer" className="font-body text-[10px] tracking-[0.2em] uppercase text-muted-foreground hover:text-foreground transition-colors duration-300">
-                            Instagram
+                            Instagram<span className="sr-only"> (opens in new tab)</span>
                         </a>
                         <a href="https://www.facebook.com/TsuruSushi.CA/" target="_blank" rel="noopener noreferrer" className="font-body text-[10px] tracking-[0.2em] uppercase text-muted-foreground hover:text-foreground transition-colors duration-300">
-                            Facebook
+                            Facebook<span className="sr-only"> (opens in new tab)</span>
                         </a>
                         <a href="tel:5103523748" className="font-body text-[10px] tracking-[0.2em] uppercase text-muted-foreground hover:text-foreground transition-colors duration-300">
                             Contact

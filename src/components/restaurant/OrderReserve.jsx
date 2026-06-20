@@ -110,7 +110,8 @@ export default function OrderReserve() {
                                             }`}
                                     >
                                         {card.cta}
-                                        <ArrowUpRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                                        <span className="sr-only"> (opens in new tab)</span>
+                                        <ArrowUpRight aria-hidden="true" className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                                     </a>
                                     <p
                                         className={`font-body text-[10px] mt-4 tracking-wider ${card.accent ? "text-background/30" : "text-muted-foreground/50"

@@ -69,7 +69,7 @@ export default function Provenance() {
                             transition={{ duration: 0.6, delay: 0.4 }}
                             className="mt-10 flex items-baseline gap-4"
                         >
-                            <span className="font-display text-6xl md:text-7xl font-light text-primary">
+                            <span className="font-display text-6xl md:text-7xl font-light text-[#ef8239]">
                                 1997
                             </span>
                             <span className="font-body text-[10px] tracking-[0.3em] uppercase text-background/40">
@@ -89,10 +89,10 @@ export default function Provenance() {
                                 className="relative py-8 border-b border-background/10 group"
                             >
                                 <div className="absolute left-0 top-0 w-px h-full bg-background/10" />
-                                <div className="absolute -left-1 top-1/2 w-2 h-px bg-primary" />
+                                <div className="absolute -left-1 top-1/2 w-2 h-px bg-[#ef8239]" />
 
                                 <div className="flex items-baseline gap-4 justify-center">
-                                    <span className="font-body text-[10px] tracking-[0.3em] uppercase text-primary">
+                                    <span className="font-body text-[10px] tracking-[0.3em] uppercase text-[#ef8239]">
                                         {pillar.number}
                                     </span>
                                     <h3 className="font-display text-3xl md:text-4xl font-light">
