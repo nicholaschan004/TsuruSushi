@@ -39,7 +39,7 @@ export default function Hero() {
     }, []);
 
     return (
-        <section className="relative h-screen overflow-hidden">
+        <section className="relative h-screen overflow-hidden bg-foreground">
             {/* Background image with parallax + slow zoom */}
             <motion.div
                 style={{ y: imgY }}
@@ -53,13 +53,14 @@ export default function Hero() {
                     alt={heroAlt}
                     className="w-full h-[120%] object-cover"
                 />
-                <div className="absolute inset-0 bg-foreground/30" />
             </motion.div>
 
-            {/* Split text */}
+            {/* Split text — the scrim lives on this text container (not just a
+                sibling overlay) so the white text has a real ~4.5:1+ backdrop
+                over the bright photo, and contrast checkers read it correctly. */}
             <motion.div
                 style={{ opacity: textOpacity }}
-                className="absolute inset-0 flex flex-col items-center justify-center z-10"
+                className="absolute inset-0 flex flex-col items-center justify-center z-10 bg-foreground/65"
             >
                 <h1 className="flex flex-col items-center overflow-hidden">
                     <motion.span
@@ -89,7 +90,7 @@ export default function Hero() {
                     className="mt-6 flex flex-col items-center gap-3"
                 >
                     {subtitles.map((sub, i) => (
-                        <p key={i} className="font-body text-[10px] tracking-[0.25em] uppercase text-background/50 text-center px-4">
+                        <p key={i} className="font-body text-[10px] tracking-[0.25em] uppercase text-background text-center px-4">
                             <InlineMarkdown text={sub} />
                         </p>
                     ))}
@@ -102,7 +103,7 @@ export default function Hero() {
                     transition={{ delay: 1.5 }}
                     className="absolute bottom-12 flex flex-col items-center gap-3"
                 >
-                    <span className="font-body text-[10px] tracking-[0.3em] uppercase text-background/60">
+                    <span className="font-body text-[10px] tracking-[0.3em] uppercase text-background">
                         Scroll
                     </span>
                     <motion.div
