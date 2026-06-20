@@ -84,7 +84,7 @@ export default function MapHours() {
                                 >
                                     <div className="flex items-center gap-3 mb-1.5">
                                         {isToday && (
-                                            <span className="w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0" />
+                                            <span className="w-1.5 h-1.5 rounded-full bg-foreground flex-shrink-0" />
                                         )}
                                         <span className={`font-display text-lg font-light ${isToday ? "text-foreground" : "text-muted-foreground"}`}>
                                             {row.day}
@@ -93,15 +93,15 @@ export default function MapHours() {
                                     <div className="flex flex-col gap-0.5 pl-4 md:pl-5">
                                         {row.lunch && (
                                             <div className="flex items-baseline justify-between">
-                                                <span className={`font-body text-[10px] tracking-[0.2em] uppercase ${isToday && isLunch ? "text-primary" : "text-muted-foreground"}`}>Lunch</span>
-                                                <span className={`font-body text-xs ${isToday && isLunch ? "text-primary" : "text-muted-foreground"}`}>{row.lunch}</span>
+                                                <span className={`font-body text-[10px] tracking-[0.2em] uppercase ${isToday && isLunch ? "text-foreground font-semibold" : "text-muted-foreground"}`}>Lunch</span>
+                                                <span className={`font-body text-xs ${isToday && isLunch ? "text-foreground font-semibold" : "text-muted-foreground"}`}>{row.lunch}</span>
                                             </div>
                                         )}
                                         <div className="flex items-baseline justify-between">
-                                            <span className={`font-body text-[10px] tracking-[0.2em] uppercase ${isToday && isDinner ? "text-primary" : "text-muted-foreground"}`}>
+                                            <span className={`font-body text-[10px] tracking-[0.2em] uppercase ${isToday && isDinner ? "text-foreground font-semibold" : "text-muted-foreground"}`}>
                                                 {row.lunch ? "Dinner" : "Open"}
                                             </span>
-                                            <span className={`font-body text-xs ${isToday && isDinner ? "text-primary" : "text-muted-foreground"}`}>{row.dinner}</span>
+                                            <span className={`font-body text-xs ${isToday && isDinner ? "text-foreground font-semibold" : "text-muted-foreground"}`}>{row.dinner}</span>
                                         </div>
                                     </div>
                                 </motion.div>
