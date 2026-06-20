@@ -93,12 +93,12 @@ export default function MapHours() {
                                     <div className="flex flex-col gap-0.5 pl-4 md:pl-5">
                                         {row.lunch && (
                                             <div className="flex items-baseline justify-between">
-                                                <span className={`font-body text-[10px] tracking-[0.2em] uppercase ${isToday && isLunch ? "text-primary" : "text-muted-foreground/60"}`}>Lunch</span>
+                                                <span className={`font-body text-[10px] tracking-[0.2em] uppercase ${isToday && isLunch ? "text-primary" : "text-muted-foreground"}`}>Lunch</span>
                                                 <span className={`font-body text-xs ${isToday && isLunch ? "text-primary" : "text-muted-foreground"}`}>{row.lunch}</span>
                                             </div>
                                         )}
                                         <div className="flex items-baseline justify-between">
-                                            <span className={`font-body text-[10px] tracking-[0.2em] uppercase ${isToday && isDinner ? "text-primary" : "text-muted-foreground/60"}`}>
+                                            <span className={`font-body text-[10px] tracking-[0.2em] uppercase ${isToday && isDinner ? "text-primary" : "text-muted-foreground"}`}>
                                                 {row.lunch ? "Dinner" : "Open"}
                                             </span>
                                             <span className={`font-body text-xs ${isToday && isDinner ? "text-primary" : "text-muted-foreground"}`}>{row.dinner}</span>
@@ -144,7 +144,12 @@ export default function MapHours() {
                                 attribution='&copy; <a href="https://carto.com/">CARTO</a>'
                                 url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
                             />
-                            <Marker position={POSITION} icon={markerIcon}>
+                            <Marker
+                                position={POSITION}
+                                icon={markerIcon}
+                                alt="Map marker for Tsuru Sushi, 1427 E 14th St, San Leandro, CA"
+                                title="Tsuru Sushi — 1427 E 14th St, San Leandro, CA"
+                            >
                                 <Popup>
                                     <div className="font-body text-xs">
                                         <strong className="font-display text-sm">TSURU</strong>
