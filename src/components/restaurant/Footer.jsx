@@ -61,7 +61,7 @@ export default function Footer() {
 
                 <div className="mt-6 pt-6 border-t border-border text-center space-y-3">
                     <p className="font-body text-xs text-muted-foreground">
-                        For catering orders & further inquiries email: <a href={`mailto:${email}`} className="text-foreground hover:text-primary transition-colors duration-300">{email}</a>
+                        For catering orders & further inquiries email: <a href={`mailto:${email}`} className="text-foreground underline underline-offset-2 hover:text-primary transition-colors duration-300">{email}</a>
                     </p>
                     <p className="font-body text-[10px] text-muted-foreground tracking-wider">
                         © 2026 Tsuru Sushi. All rights reserved.

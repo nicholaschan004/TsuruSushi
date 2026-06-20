@@ -72,7 +72,7 @@ export default function Provenance() {
                             <span className="font-display text-6xl md:text-7xl font-light text-[#ef8239]">
                                 1997
                             </span>
-                            <span className="font-body text-[10px] tracking-[0.3em] uppercase text-background/40">
+                            <span className="font-body text-[10px] tracking-[0.3em] uppercase text-background/60">
                                 Est.
                             </span>
                         </motion.div>
