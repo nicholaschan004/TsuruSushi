@@ -109,18 +109,13 @@ export default function MapHours() {
                         })}
                     </div>
 
-                    <motion.p
-                        initial={{ opacity: 0 }}
-                        animate={isInView ? { opacity: 1 } : {}}
-                        transition={{ delay: 0.9 }}
-                        className="font-body text-xs text-muted-foreground mt-6 leading-relaxed"
-                    >
+                    <p className="font-body text-xs text-muted-foreground mt-6 leading-relaxed">
                         Reservations strongly recommended.
                         <br />
                         Walk-ins subject to availability.
                         <br />
                         Phone-in to order ahead.
-                    </motion.p>
+                    </p>
                 </motion.div>
 
                 {/* Map */}
