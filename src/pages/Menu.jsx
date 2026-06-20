@@ -130,7 +130,7 @@ export default function Menu() {
 
     return (
         <div className="min-h-screen bg-background">
-            <Navigation forceScrolled />
+            <Navigation />
 
             {/* Hero */}
             <section ref={heroRef} className="pt-20 md:pt-24 pb-4 md:pb-6 px-6 md:px-12">
