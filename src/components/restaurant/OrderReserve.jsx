@@ -59,7 +59,7 @@ export default function OrderReserve() {
                             <br />
                             at our restaurant
                         </h2>
-                        <a href="tel:5103523748" className="font-display text-3xl md:text-4xl lg:text-5xl font-light text-primary hover:text-primary/80 transition-colors duration-300 mt-2 block">
+                        <a href="tel:5103523748" className="font-display text-3xl md:text-4xl lg:text-5xl font-light text-foreground hover:text-foreground/70 transition-colors duration-300 mt-2 block">
                             (510) 352-3748
                         </a>
                         <p className="font-body text-xs text-muted-foreground mt-6 tracking-[0.15em] uppercase">
@@ -105,7 +105,7 @@ export default function OrderReserve() {
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className={`inline-flex items-center gap-2 px-5 py-3 md:px-6 md:py-3 font-body text-[10px] md:text-xs tracking-[0.2em] uppercase transition-all duration-300 group ${card.accent
-                                                ? "bg-primary text-primary-foreground hover:bg-primary/90"
+                                                ? "bg-background text-foreground hover:bg-background/90"
                                                 : "bg-foreground text-background hover:bg-foreground/90"
                                             }`}
                                     >
@@ -114,7 +114,7 @@ export default function OrderReserve() {
                                         <ArrowUpRight aria-hidden="true" className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                                     </a>
                                     <p
-                                        className={`font-body text-[10px] mt-4 tracking-wider ${card.accent ? "text-background/30" : "text-muted-foreground/50"
+                                        className={`font-body text-[10px] mt-4 tracking-wider ${card.accent ? "text-background/60" : "text-muted-foreground"
                                             }`}
                                     >
                                         {card.note}
