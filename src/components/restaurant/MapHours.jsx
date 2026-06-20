@@ -168,7 +168,7 @@ export default function MapHours() {
                         <div className="flex items-center justify-between">
                             <div className="flex items-center gap-2">
                                 <span className="font-display text-sm font-light text-foreground">1427 E 14th St, San Leandro, CA 94577</span>
-                                <span className="text-muted-foreground/30">|</span>
+                                <span aria-hidden="true" className="text-muted-foreground">|</span>
                                 <a href="tel:5103523748" className="font-body text-xs text-muted-foreground hover:text-foreground transition-colors duration-300">
                                     (510) 352-3748
                                 </a>
