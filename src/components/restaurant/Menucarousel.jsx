@@ -108,7 +108,7 @@ export default function MenuCarousel() {
                                     className="inline-flex items-center gap-2 font-body text-xs tracking-[0.2em] uppercase text-muted-foreground hover:text-foreground transition-colors duration-300 group"
                                 >
                                     View Full Menu
-                                    <ArrowRight className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1" />
+                                    <ArrowRight aria-hidden="true" className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-1" />
                                 </Link>
                             </div>
                         </motion.div>
