@@ -2,3 +2,8 @@
 node_modules
 dist
 .claude
+
+# Environment secrets
+.env
+.env.*
+!.env.example
