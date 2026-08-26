@@ -4,7 +4,7 @@
 
 *Restaurant site for a Japanese sushi kitchen*
 
-[![Live site](https://img.shields.io/badge/Live-tsuru--sushi.vercel.app-1a1a1a?style=flat-square)](https://tsuru-sushi.vercel.app)
+[![Live site](https://img.shields.io/badge/Live-tsurusushi.com-1a1a1a?style=flat-square)](https://tsurusushi.com)
 [![React](https://img.shields.io/badge/React-18-61dafb?style=flat-square&logo=react&logoColor=white)](https://react.dev)
 [![Vite](https://img.shields.io/badge/Vite-6-646cff?style=flat-square&logo=vite&logoColor=white)](https://vite.dev)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-3-38bdf8?style=flat-square&logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
@@ -53,8 +53,8 @@ the staff have most recently entered.
 **Prerequisites:** Node.js 20+
 
 ```bash
-git clone https://github.com/nicholaschan004/TsuruSushi2.git
-cd TsuruSushi2
+git clone https://github.com/nicholaschan004/TsuruSushi.git
+cd TsuruSushi
 npm install
 npm run dev
 ```
