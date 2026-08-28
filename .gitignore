@@ -11,3 +11,8 @@ dist
 # Planning artifacts and OS cruft
 .planning/
 .DS_Store
+
+# Internal notes, deliberately not published
+CLAUDE.md
+docs/
+.env.example

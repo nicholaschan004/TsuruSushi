@@ -9,7 +9,7 @@
 [![Vite](https://img.shields.io/badge/Vite-6-646cff?style=flat-square&logo=vite&logoColor=white)](https://vite.dev)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-3-38bdf8?style=flat-square&logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
 
-[Overview](#overview) • [Content workflow](#content-workflow) • [Getting started](#getting-started) • [Structure](#structure)
+[Overview](#overview) • [Content workflow](#content-workflow) • [Structure](#structure)
 
 </div>
 
@@ -22,10 +22,10 @@ restaurant through a Google Sheet, so the menu changes without a deploy.
 Restaurant sites go stale because updating them requires a developer. This one is built so
 the people running the kitchen can change what the site says.
 
-- **Menu and daily catch driven by Google Sheets** — no CMS, no admin login
+- **Menu and daily catch driven by Google Sheets**, no CMS, no admin login
 - **Images pulled and localized at build time** rather than hotlinked from Drive
-- **Ordering routes in one place** — DoorDash, Grubhub and Uber Eats side by side
-- **No runtime configuration** — the build is fully static and deploys anywhere
+- **Ordering routes in one place**: DoorDash, Grubhub and Uber Eats side by side
+- **No runtime configuration**, the build is fully static and deploys anywhere
 
 ## Content workflow
 
@@ -45,34 +45,8 @@ the staff have most recently entered.
 
 > [!NOTE]
 > Hotlinking Google Drive images directly was the original approach and it was slow and
-> fragile — Drive rate limits and rewrites URLs. Downloading at build time removed a runtime
+> fragile, since Drive rate limits and rewrites URLs. Downloading at build time removed a runtime
 > dependency and a whole class of broken images.
-
-## Getting started
-
-**Prerequisites:** Node.js 20+
-
-```bash
-git clone https://github.com/nicholaschan004/TsuruSushi.git
-cd TsuruSushi
-npm install
-npm run dev
-```
-
-The site needs no environment variables — the published Sheet URLs are part of the source, so
-a fresh clone runs immediately.
-
-| Command | Purpose |
-| --- | --- |
-| `npm run dev` | Start the dev server |
-| `npm run sync-images` | Pull Sheet images into `public/sheets-images/` |
-| `npm run build` | Sync images, then build for production |
-| `npm run lint` | ESLint |
-| `npm run typecheck` | Type check via `jsconfig.json` |
-
-> [!TIP]
-> `sync-images` is wired to `prebuild`, so `npm run build` already refreshes imagery. Run it
-> on its own when you want new photos to show up in local dev.
 
 ## Structure
 
