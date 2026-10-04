@@ -18,6 +18,10 @@ export default function Home() {
     }, [])
 
     useEffect(() => {
+        document.title = "Tsuru Sushi | Japanese Restaurant in San Leandro"
+    }, [])
+
+    useEffect(() => {
         const target = location.state?.scrollTo || location.hash
         if (!target) return
         if (isFirstRender.current && !location.state?.scrollTo) {
@@ -35,7 +39,7 @@ export default function Home() {
     return (
         <div className="min-h-screen bg-background">
             <Navigation />
-            <main>
+            <main id="main-content" tabIndex={-1}>
                 <Hero />
                 <Experience />
                 <MenuCarousel />

@@ -54,7 +54,7 @@ export default function MapHours() {
     const isDinner = currentHour >= 16 && currentHour < 21.5;
 
     return (
-        <section id="hours" ref={ref} className="min-h-screen flex flex-col justify-center py-16 md:py-24 px-6 md:px-12 max-w-screen-2xl mx-auto">
+        <section id="hours" ref={ref} className="min-h-screen max-w-screen-2xl mx-auto flex flex-col justify-center overflow-hidden py-16 md:py-24 px-6 md:px-12">
             <div className="grid grid-cols-12 gap-6 md:gap-10">
 
                 {/* Hours */}
@@ -62,7 +62,7 @@ export default function MapHours() {
                     initial={{ opacity: 0, y: 30 }}
                     animate={isInView ? { opacity: 1, y: 0 } : {}}
                     transition={{ duration: 0.8 }}
-                    className="col-span-12 md:col-span-4 md:col-start-2"
+                    className="col-span-12 min-w-0 md:col-span-4 md:col-start-2"
                 >
                     <p className="font-body text-[10px] tracking-[0.4em] uppercase text-muted-foreground mb-4">
                         Hours of Service
@@ -123,7 +123,7 @@ export default function MapHours() {
                     initial={{ opacity: 0, x: 40 }}
                     animate={isInView ? { opacity: 1, x: 0 } : {}}
                     transition={{ duration: 1, delay: 0.2 }}
-                    className="col-span-12 md:col-span-6 md:col-start-7 flex flex-col"
+                    className="col-span-12 flex min-w-0 flex-col md:col-span-6 md:col-start-7"
                 >
                     <div className="relative overflow-hidden flex-1 min-h-[260px]">
                         <MapContainer
@@ -136,8 +136,9 @@ export default function MapHours() {
                         >
                             <MapAccessibility label="Interactive map showing Tsuru Sushi at 1427 E 14th St, San Leandro, CA" />
                             <TileLayer
-                                attribution='&copy; <a href="https://carto.com/">CARTO</a>'
-                                url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
+                                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                                url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
+                                maxZoom={19}
                             />
                             <Marker
                                 position={POSITION}
@@ -160,10 +161,10 @@ export default function MapHours() {
 
                     {/* Address bar beneath map */}
                     <div className="mt-4 py-3 border-t border-b border-border">
-                        <div className="flex items-center justify-between">
-                            <div className="flex items-center gap-2">
+                        <div className="flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between">
+                            <div className="flex min-w-0 flex-col items-start gap-1 sm:flex-row sm:items-center sm:gap-2">
                                 <span className="font-display text-sm font-light text-foreground">1427 E 14th St, San Leandro, CA 94577</span>
-                                <span aria-hidden="true" className="text-muted-foreground">|</span>
+                                <span aria-hidden="true" className="hidden text-muted-foreground sm:inline">|</span>
                                 <a href="tel:5103523748" className="font-body text-xs text-muted-foreground hover:text-foreground transition-colors duration-300">
                                     (510) 352-3748
                                 </a>

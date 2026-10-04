@@ -1,38 +1,29 @@
 import React from "react";
 import { motion, useInView } from "framer-motion";
 import { useRef } from "react";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Phone } from "lucide-react";
+import { TOAST_ORDER_URL } from "@/lib/order-links";
 
 const CARDS = [
     {
-        label: "Delivery & Pickup",
-        heading: "Order on DoorDash",
+        label: "Direct Online Ordering",
+        heading: "Order with Toast",
         description:
-            "Get Tsuru delivered to your door or pick it up fresh — nigiri, rolls, and more available on DoorDash.",
-        cta: "Order on DoorDash",
-        href: "https://www.doordash.com/store/tsuru-sushi-san-leandro-78059/2312584/?pickup=true&utm_campaign=gpa",
-        note: "Powered by DoorDash",
-        accent: false,
+            "Order pickup or delivery through Tsuru Sushi's new online ordering experience.",
+        cta: "Start Your Order",
+        href: TOAST_ORDER_URL,
+        note: "Powered by Toast",
+        featured: true,
+        external: true,
     },
     {
-        label: "Delivery & Pickup",
-        heading: "Order on Grubhub",
+        label: "Phone Ordering",
+        heading: "Call for Pickup",
         description:
-            "Order our full menu for delivery or pickup through Grubhub — fresh sushi straight from our kitchen to you.",
-        cta: "Order on Grubhub",
-        href: "https://www.grubhub.com/restaurant/tsuru-sushi-japanese-restaurant-1427-e-14th-st-san-leandro/4073528",
-        note: "Powered by Grubhub",
-        accent: true,
-    },
-    {
-        label: "Delivery & Pickup",
-        heading: "Order on Uber Eats",
-        description:
-            "Craving sushi? Order Tsuru for delivery or pickup through Uber Eats — quick, easy, and always fresh.",
-        cta: "Order on Uber Eats",
-        href: "https://www.ubereats.com/store/tsuru-sushi-japanese-restaurant/mwIEYF8XWNCkri-zaJby1Q?diningMode=PICKUP",
-        note: "Powered by Uber Eats",
-        accent: false,
+            "Call us to place your pickup order directly with the restaurant.",
+        cta: "(510) 352-3748",
+        href: "tel:5103523748",
+        note: "Pickup orders",
     },
 ];
 
@@ -50,26 +41,20 @@ export default function OrderReserve() {
                     transition={{ duration: 0.8 }}
                     className="grid grid-cols-12 gap-4 mb-16"
                 >
-                    <div className="col-span-12 md:col-span-6 md:col-start-2">
+                    <div className="col-span-12 md:col-span-8">
                         <p className="font-body text-[10px] tracking-[0.4em] uppercase text-muted-foreground mb-4">
-                            Pickup
+                            Pickup &amp; Delivery
                         </p>
                         <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-light text-foreground leading-tight">
-                            Phone-In to pick up
+                            Order Online or
                             <br />
-                            at our restaurant
+                            Give Us a Call
                         </h2>
-                        <a href="tel:5103523748" className="font-display text-3xl md:text-4xl lg:text-5xl font-light text-foreground hover:text-foreground/70 transition-colors duration-300 mt-2 block">
-                            (510) 352-3748
-                        </a>
-                        <p className="font-body text-xs text-muted-foreground mt-6 tracking-[0.15em] uppercase">
-                            Order through online platforms below for delivery
-                        </p>
                     </div>
                 </motion.div>
 
                 {/* Cards */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
                     {CARDS.map((card, i) => (
                         <motion.div
                             key={card.heading}
@@ -78,12 +63,12 @@ export default function OrderReserve() {
                             transition={{ duration: 0.7, delay: i * 0.15 }}
                         >
                             <div
-                                className={`h-full flex flex-col justify-between p-8 md:p-10 border border-border ${card.accent ? "bg-foreground text-background" : "bg-background text-foreground"
+                                className={`h-full flex flex-col justify-between gap-8 p-8 md:p-10 border border-border ${card.featured ? "bg-foreground text-background" : "bg-background text-foreground"
                                     }`}
                             >
                                 <div>
                                     <p
-                                        className={`font-body text-[10px] tracking-[0.4em] uppercase mb-6 ${card.accent ? "text-background/50" : "text-muted-foreground"
+                                        className={`font-body text-[10px] tracking-[0.4em] uppercase mb-6 ${card.featured ? "text-background/60" : "text-muted-foreground"
                                             }`}
                                     >
                                         {card.label}
@@ -92,7 +77,7 @@ export default function OrderReserve() {
                                         {card.heading}
                                     </h3>
                                     <p
-                                        className={`font-body text-sm mt-6 leading-[1.8] ${card.accent ? "text-background/60" : "text-muted-foreground"
+                                        className={`font-body text-sm mt-6 leading-[1.8] ${card.featured ? "text-background/70" : "text-muted-foreground"
                                             }`}
                                     >
                                         {card.description}
@@ -102,19 +87,23 @@ export default function OrderReserve() {
                                 <div className="mt-8">
                                     <a
                                         href={card.href}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className={`inline-flex items-center gap-2 px-5 py-3 md:px-6 md:py-3 font-body text-[10px] md:text-xs tracking-[0.2em] uppercase transition-all duration-300 group ${card.accent
-                                                ? "bg-background text-foreground hover:bg-background/90"
+                                        target={card.external ? "_blank" : undefined}
+                                        rel={card.external ? "noopener noreferrer" : undefined}
+                                        className={`inline-flex items-center gap-2 px-5 py-3 md:px-6 md:py-3 font-body text-[10px] md:text-xs tracking-[0.2em] uppercase transition-all duration-300 group ${card.featured
+                                                ? "bg-[#63b9aa] text-foreground hover:bg-[#4fa494]"
                                                 : "bg-foreground text-background hover:bg-foreground/90"
                                             }`}
                                     >
                                         {card.cta}
-                                        <span className="sr-only"> (opens in new tab)</span>
-                                        <ArrowUpRight aria-hidden="true" className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                                        {card.external && <span className="sr-only"> (opens in new tab)</span>}
+                                        {card.external ? (
+                                            <ArrowUpRight aria-hidden="true" className="w-3.5 h-3.5 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                                        ) : (
+                                            <Phone aria-hidden="true" className="h-3.5 w-3.5" />
+                                        )}
                                     </a>
                                     <p
-                                        className={`font-body text-[10px] mt-4 tracking-wider ${card.accent ? "text-background/60" : "text-muted-foreground"
+                                        className={`font-body text-[10px] mt-4 tracking-wider ${card.featured ? "text-background/60" : "text-muted-foreground"
                                             }`}
                                     >
                                         {card.note}

@@ -36,7 +36,7 @@ export default function Provenance() {
     }, []);
 
     return (
-        <section id="about" ref={ref} className="snap-start min-h-screen flex flex-col justify-center py-16 md:py-24 bg-foreground text-background">
+        <section id="about" ref={ref} className="snap-start min-h-screen flex flex-col justify-center overflow-hidden py-16 md:py-24 bg-foreground text-background">
             <div className="px-6 md:px-12 max-w-screen-2xl mx-auto">
                 <div className="grid grid-cols-12 gap-6 md:gap-10">
 

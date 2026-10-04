@@ -25,6 +25,12 @@
         --font-display: 'Cormorant Garamond', serif;
         --font-body: 'Inter', sans-serif;
 
+        /* Exact orange sampled from the Tsuru logo. Dark lettering keeps the
+           bright brand color readable on ordering CTAs. */
+        --brand-orange: 25 100% 48%;
+        --brand-orange-hover: 25 100% 43%;
+        --brand-orange-foreground: 160 18% 8%;
+
         --background: 40 33% 98%;
         --foreground: 160 18% 8%;
         --card: 40 33% 98%;
@@ -118,6 +124,12 @@
     h5,
     h6 {
         font-family: var(--font-display);
+    }
+
+    :focus-visible {
+        outline: 2px solid hsl(var(--background));
+        outline-offset: 2px;
+        box-shadow: 0 0 0 4px hsl(var(--ring));
     }
 }
 

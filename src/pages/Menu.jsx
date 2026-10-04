@@ -112,6 +112,7 @@ export default function Menu() {
 
     useEffect(() => {
         window.scrollTo(0, 0);
+        document.title = "Menu | Tsuru Sushi";
     }, []);
 
     useEffect(() => {
@@ -131,6 +132,8 @@ export default function Menu() {
     return (
         <div className="min-h-screen bg-background">
             <Navigation />
+
+            <main id="main-content" tabIndex={-1}>
 
             {/* Hero */}
             <section ref={heroRef} className="pt-20 md:pt-24 pb-4 md:pb-6 px-6 md:px-12">
@@ -155,6 +158,7 @@ export default function Menu() {
                             <button
                                 key={cat}
                                 onClick={() => { setActiveCategory(cat); window.scrollTo({ top: 0 }); }}
+                                aria-pressed={activeCategory === cat}
                                 className={`font-body text-xs tracking-[0.2em] uppercase whitespace-nowrap transition-colors duration-300 pb-1 ${
                                     activeCategory === cat
                                         ? "text-foreground border-b border-foreground"
@@ -223,6 +227,8 @@ export default function Menu() {
                     </motion.div>
                 </AnimatePresence>
             )}
+
+            </main>
 
             <Footer />
         </div>
