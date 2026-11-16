@@ -9,7 +9,7 @@
 [![Vite](https://img.shields.io/badge/Vite-6-646cff?style=flat-square&logo=vite&logoColor=white)](https://vite.dev)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-3-38bdf8?style=flat-square&logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
 
-[Overview](#overview) • [Content workflow](#content-workflow) • [Structure](#structure)
+[Overview](#overview) • [Content workflow](#content-workflow) • [Structure](#structure) • [Architecture](#architecture)
 
 </div>
 
@@ -71,3 +71,60 @@ scripts/
 `InlineMarkdown` exists because staff write copy in spreadsheet cells and reasonably expect
 bold and line breaks to work. It supports a deliberately small subset rather than pulling in a
 full markdown parser for a handful of fields.
+
+## Architecture
+
+The build only localizes images, from the Hero and Menu carousel tabs. All text (menu, specials, story, contact email) is read from the published Sheet in the visitor's browser, through `lib/google-sheets.js` with a 5 minute memory and localStorage cache. The `/menu` page fetches its own tab directly. Hosting config exists for both Cloudflare Pages (`public/_headers`, `public/_redirects`) and Vercel (`vercel.json`), with matching SPA fallback, `/menu.html` redirect and CSP.
+
+```mermaid
+flowchart LR
+  subgraph sheet["Google Sheet (published CSV tabs)"]
+    heroTab["Hero"]
+    carTab["Menu carousel"]
+    expTab["Experience"]
+    provTab["Provenance"]
+    footTab["Footer email"]
+    menuTab["Full menu"]
+  end
+  heroTab --> sync["scripts/sync-sheet-images.mjs (prebuild)"]
+  carTab --> sync
+  sync --> imgs["public/sheets-images/* + public/hero-default.jpg"]
+  sync --> manifest["src/data/sheet-images.json"]
+  imgs --> build["vite build"]
+  manifest --> build
+  build --> host["Cloudflare Pages or Vercel (static dist)"]
+  host --> browser["Browser"]
+  sheet -.->|"runtime CSV fetch, 5 min cache"| browser
+  osm["tile.openstreetmap.org"] -.->|"map tiles"| browser
+  browser --> toast["Toast online ordering"]
+```
+
+The home page is one scroll-snapped page; `/menu` is the full menu:
+
+```mermaid
+flowchart TB
+  main["main.jsx"] --> app["App.jsx (QueryClientProvider, MotionConfig, Router)"]
+  app --> home["/ : pages/Home.jsx"]
+  app --> menu["/menu : pages/Menu.jsx"]
+  app --> nf["* : lib/PageNotFound.jsx"]
+  home --> nav["Navigation"]
+  home --> hero["Hero"]
+  home --> exp["Experience"]
+  home --> car["MenuCarousel"]
+  home --> order["OrderReserve (Toast + phone)"]
+  home --> prov["Provenance"]
+  home --> map["MapHours (react-leaflet)"]
+  home --> foot["Footer"]
+  hero --> gs["lib/google-sheets.js fetchSheet"]
+  exp --> gs
+  car --> gs
+  prov --> gs
+  foot --> gs
+  hero --> ir["lib/image-resolver.js"]
+  car --> ir
+  menu --> md["lib/InlineMarkdown.jsx"]
+  hero --> md
+  car --> md
+  exp --> md
+  prov --> md
+```
